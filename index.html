@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Nº10 Chronograph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@200;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #070b14;
+    --navy: #0e1a2e;
+    --gold: #c9a45c;
+    --gold-hi: #ecd9a4;
+    --gold-lo: #8a6d34;
+    --celeste: #75aadb;
+    --ivory: #f3efe6;
+    --muted: #8d93a1;
+    --line: rgba(201, 164, 92, 0.18);
+    --serif: "Cormorant Garamond", "Times New Roman", serif;
+    --sans: "Inter", system-ui, "Segoe UI", "Malgun Gothic", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(120% 80% at 50% 30%, var(--navy) 0%, var(--night) 62%),
+      var(--night);
+    color: var(--ivory);
+    font-family: var(--sans);
+    display: flex; justify-content: center;
+    padding: 40px 16px 56px;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Albiceleste: faint vertical stripes, barely there */
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(90deg,
+      rgba(117, 170, 219, 0.035) 0 64px, transparent 64px 128px);
+    mask-image: linear-gradient(180deg, transparent, #000 25%, #000 75%, transparent);
+  }
+  main { position: relative; width: 100%; max-width: 440px; text-align: center; }
+
+  header { margin-bottom: 4px; }
+  .stars { display: flex; gap: 10px; justify-content: center; }
+  .stars svg { width: 9px; height: 9px; fill: var(--gold); }
+  .eyebrow {
+    display: flex; align-items: center; gap: 14px; justify-content: center;
+    font-size: 11px; letter-spacing: 0.32em; color: var(--gold);
+    text-transform: uppercase; margin-top: 10px;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: ""; width: 36px; height: 1px; background: var(--line);
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 500; font-style: italic;
+    font-size: 30px; margin: 4px 0 0; letter-spacing: 0.02em;
+  }
+  /* Kit-sleeve trim: celeste · white · celeste */
+  .trim { display: flex; justify-content: center; gap: 3px; margin-top: 12px; }
+  .trim i { display: block; width: 14px; height: 2px; background: var(--celeste); }
+  .trim i:nth-child(2) { background: var(--ivory); }
+
+  /* Dial */
+  .dial { position: relative; width: min(86vw, 360px, 50vh); aspect-ratio: 1; margin: 14px auto 4px; }
+  .dial svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .readout {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .ten {
+    font-family: var(--serif); font-size: 15px; color: var(--gold);
+    letter-spacing: 0.2em; margin-bottom: 6px; font-variant-numeric: lining-nums;
+  }
+  #time {
+    font-weight: 200; font-size: clamp(44px, 14vw, 64px);
+    font-variant-numeric: tabular-nums; letter-spacing: -0.02em; line-height: 1;
+  }
+  #time .cs { font-size: 0.42em; color: var(--muted); margin-left: 2px; font-weight: 400; }
+  .state {
+    margin-top: 12px; font-size: 10px; letter-spacing: 0.3em; color: var(--muted);
+    text-transform: uppercase;
+  }
+  .state.live { color: var(--gold); }
+
+  /* Match bar: 0' — 45' — 90' */
+  .match { margin: 4px auto 24px; max-width: 300px; }
+  .match-track { position: relative; height: 2px; background: rgba(255,255,255,0.08); border-radius: 2px; }
+  .match-fill {
+    position: absolute; inset: 0 auto 0 0; width: 0;
+    background: linear-gradient(90deg, var(--celeste), var(--gold));
+    border-radius: 2px;
+  }
+  .match-ht { position: absolute; left: 50%; top: -3px; width: 1px; height: 8px; background: var(--muted); }
+  .match-head {
+    position: absolute; top: 50%; left: 0; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold-hi); transform: translate(-50%, -50%);
+  }
+  .match-labels {
+    display: flex; justify-content: space-between; margin-top: 8px;
+    font-size: 10px; letter-spacing: 0.18em; color: var(--muted);
+  }
+
+  /* Controls */
+  .controls { display: flex; justify-content: center; align-items: center; gap: 28px; }
+  button {
+    font-family: var(--sans); cursor: pointer; border-radius: 50%;
+    display: grid; place-items: center; transition: transform .15s, opacity .2s, background .2s;
+  }
+  button:active { transform: scale(0.96); }
+  button:disabled { opacity: 0.3; cursor: default; transform: none; }
+  .side {
+    width: 64px; height: 64px; background: transparent; color: var(--ivory);
+    border: 1px solid var(--line); font-size: 12px; letter-spacing: 0.12em;
+  }
+  .side:not(:disabled):hover { border-color: var(--gold); }
+  #toggle {
+    width: 84px; height: 84px; border: none; color: var(--night);
+    background: linear-gradient(145deg, var(--gold-hi), var(--gold) 45%, var(--gold-lo));
+    box-shadow: 0 10px 30px rgba(201, 164, 92, 0.25), inset 0 1px 0 rgba(255,255,255,0.4);
+    font-size: 13px; font-weight: 600; letter-spacing: 0.14em;
+  }
+  #toggle.running {
+    background: transparent; color: var(--gold);
+    box-shadow: inset 0 0 0 1px var(--gold);
+  }
+
+  /* Laps */
+  .laps { margin-top: 32px; text-align: left; }
+  .laps-head, .lap {
+    display: grid; grid-template-columns: 1fr 1.2fr 1.2fr; align-items: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .laps-head {
+    font-size: 10px; letter-spacing: 0.22em; color: var(--muted);
+    padding: 0 4px 10px; border-bottom: 1px solid var(--line);
+  }
+  .laps-head span:not(:first-child), .lap span:not(:first-child) { text-align: right; }
+  ol { list-style: none; margin: 0; padding: 0; }
+  .lap { padding: 13px 4px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 15px; }
+  .lap .n {
+    font-family: var(--serif); font-style: italic; color: var(--muted); font-size: 17px;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .lap .total { color: var(--muted); font-size: 13px; }
+  .lap .tag {
+    font-family: var(--sans); font-style: normal; font-size: 9px; letter-spacing: 0.2em;
+    margin-left: 8px; vertical-align: 2px;
+  }
+  .lap.best .split, .lap.best .tag { color: var(--gold); }
+  .lap.worst .tag { color: var(--celeste); }
+  .empty { padding: 18px 4px; color: var(--muted); font-size: 13px; text-align: center; }
+
+  footer {
+    margin-top: 40px; font-size: 10px; letter-spacing: 0.28em; color: var(--muted);
+    text-transform: uppercase;
+  }
+  footer .keys { margin-top: 8px; letter-spacing: 0.12em; text-transform: none; opacity: 0.8; }
+  @media (hover: none) { footer .keys { display: none; } }
+  kbd {
+    font-family: var(--sans); font-size: 10px; border: 1px solid var(--line);
+    border-radius: 4px; padding: 1px 5px; color: var(--ivory);
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="stars" aria-hidden="true">
+      <svg viewBox="0 0 10 10"><path d="M5 0l1.18 3.38H10L6.9 5.47 8.09 9 5 6.9 1.91 9 3.1 5.47 0 3.38h3.82z"/></svg>
+      <svg viewBox="0 0 10 10"><path d="M5 0l1.18 3.38H10L6.9 5.47 8.09 9 5 6.9 1.91 9 3.1 5.47 0 3.38h3.82z"/></svg>
+      <svg viewBox="0 0 10 10"><path d="M5 0l1.18 3.38H10L6.9 5.47 8.09 9 5 6.9 1.91 9 3.1 5.47 0 3.38h3.82z"/></svg>
+    </div>
+    <div class="eyebrow">Edición Nº 10</div>
+    <h1>La Pulga Chronograph</h1>
+    <div class="trim" aria-hidden="true"><i></i><i></i><i></i></div>
+  </header>
+
+  <div class="dial">
+    <svg viewBox="0 0 400 400" aria-hidden="true">
+      <defs>
+        <linearGradient id="goldArc" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ecd9a4"/>
+          <stop offset="0.5" stop-color="#c9a45c"/>
+          <stop offset="1" stop-color="#8a6d34"/>
+        </linearGradient>
+      </defs>
+      <g id="sun" opacity="0.32"></g>
+      <circle cx="200" cy="200" r="102" fill="none" stroke="rgba(201,164,92,0.14)" stroke-width="1"/>
+      <circle cx="200" cy="200" r="186" fill="none" stroke="rgba(201,164,92,0.22)" stroke-width="1"/>
+      <g id="ticks"></g>
+      <g id="numerals"></g>
+      <circle cx="200" cy="200" r="138" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+      <circle id="arc" cx="200" cy="200" r="138" fill="none" stroke="url(#goldArc)"
+              stroke-width="2" stroke-linecap="round" transform="rotate(-90 200 200)"/>
+      <circle id="dot" cx="200" cy="62" r="4" fill="#ecd9a4"/>
+    </svg>
+    <div class="readout">
+      <div class="ten">Nº 10</div>
+      <div id="time">00:00<span class="cs">.00</span></div>
+      <div id="state" class="state">Ready</div>
+    </div>
+  </div>
+
+  <div class="match" aria-label="경기 시간">
+    <div class="match-track">
+      <div id="matchFill" class="match-fill"></div><div class="match-ht"></div>
+      <div id="matchHead" class="match-head"></div>
+    </div>
+    <div class="match-labels"><span>KICK-OFF</span><span>HT 45'</span><span>FT 90'</span></div>
+  </div>
+
+  <div class="controls">
+    <button id="lap" class="side" disabled>LAP</button>
+    <button id="toggle">START</button>
+    <button id="reset" class="side" disabled>RESET</button>
+  </div>
+
+  <section class="laps">
+    <div class="laps-head"><span>LAP</span><span>SPLIT</span><span>TOTAL</span></div>
+    <ol id="laps"><li class="empty">랩을 기록하면 여기에 표시됩니다</li></ol>
+  </section>
+
+  <footer>
+    Rosario · 24.06.1987
+    <div class="keys"><kbd>Space</kbd> 시작/정지 · <kbd>L</kbd> 랩 · <kbd>R</kbd> 초기화</div>
+  </footer>
+</main>
+<script>
+  // --- Dial decoration ---
+  const NS = 'http://www.w3.org/2000/svg';
+  const ticks = document.getElementById('ticks');
+  for (let i = 0; i < 60; i++) {
+    const major = i % 5 === 0;
+    const a = (i / 60) * Math.PI * 2;
+    const r1 = 178, r2 = major ? 164 : 171;
+    const line = document.createElementNS(NS, 'line');
+    line.setAttribute('x1', 200 + r1 * Math.sin(a)); line.setAttribute('y1', 200 - r1 * Math.cos(a));
+    line.setAttribute('x2', 200 + r2 * Math.sin(a)); line.setAttribute('y2', 200 - r2 * Math.cos(a));
+    line.setAttribute('stroke', major ? '#c9a45c' : 'rgba(243,239,230,0.25)');
+    line.setAttribute('stroke-width', major ? 1.6 : 1);
+    ticks.appendChild(line);
+  }
+  // Dial numerals 05–60, chronograph style
+  const numerals = document.getElementById('numerals');
+  for (let i = 1; i <= 12; i++) {
+    const a = (i / 12) * Math.PI * 2;
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', 200 + 153 * Math.sin(a));
+    t.setAttribute('y', 200 - 153 * Math.cos(a));
+    t.setAttribute('text-anchor', 'middle');
+    t.setAttribute('dominant-baseline', 'central');
+    t.setAttribute('fill', 'rgba(243,239,230,0.45)');
+    t.setAttribute('font-family', 'Inter, sans-serif');
+    t.setAttribute('font-size', '9');
+    t.setAttribute('letter-spacing', '0.5');
+    t.textContent = String(i * 5).padStart(2, '0');
+    numerals.appendChild(t);
+  }
+  // Sol de Mayo: 32 rays alternating straight and flamed (wavy), as on the flag
+  const sun = document.getElementById('sun');
+  for (let i = 0; i < 32; i++) {
+    const a = (i / 32) * Math.PI * 2;
+    const p = (r, off = 0) => {
+      const x = 200 + r * Math.sin(a) + off * Math.cos(a);
+      const y = 200 - r * Math.cos(a) + off * Math.sin(a);
+      return `${x.toFixed(1)} ${y.toFixed(1)}`;
+    };
+    const ray = document.createElementNS(NS, 'path');
+    ray.setAttribute('d', i % 2
+      ? `M${p(106)} C${p(112, 2.5)} ${p(118, -2.5)} ${p(124)} S${p(130, 2)} ${p(131)}`
+      : `M${p(106)} L${p(130)}`);
+    ray.setAttribute('fill', 'none');
+    ray.setAttribute('stroke', '#c9a45c');
+    ray.setAttribute('stroke-width', 1);
+    sun.appendChild(ray);
+  }
+
+  // --- Stopwatch ---
+  const $ = id => document.getElementById(id);
+  const timeEl = $('time'), stateEl = $('state'), toggleBtn = $('toggle'),
+        lapBtn = $('lap'), resetBtn = $('reset'), lapsEl = $('laps'),
+        arc = $('arc'), dot = $('dot'), matchFill = $('matchFill'), matchHead = $('matchHead');
+  const R = 138, C = 2 * Math.PI * R;
+  arc.setAttribute('stroke-dasharray', C);
+
+  let startTime = 0, elapsed = 0, running = false, rafId = null;
+  let laps = []; // split durations in ms
+
+  const now = () => elapsed + (running ? performance.now() - startTime : 0);
+  const pad = n => String(n).padStart(2, '0');
+
+  function format(ms) {
+    const cs = Math.floor(ms / 10) % 100;
+    const s = Math.floor(ms / 1000) % 60;
+    const m = Math.floor(ms / 60000) % 60;
+    const h = Math.floor(ms / 3600000);
+    return { main: (h ? h + ':' : '') + pad(m) + ':' + pad(s), cs: pad(cs) };
+  }
+
+  function render() {
+    const t = now();
+    const { main, cs } = format(t);
+    timeEl.innerHTML = `${main}<span class="cs">.${cs}</span>`;
+
+    const frac = (t % 60000) / 60000;
+    arc.setAttribute('stroke-dashoffset', C * (1 - frac));
+    const a = frac * Math.PI * 2;
+    dot.setAttribute('cx', 200 + R * Math.sin(a));
+    dot.setAttribute('cy', 200 - R * Math.cos(a));
+
+    const pct = Math.min(t / 60000 / 90, 1) * 100 + '%';
+    matchFill.style.width = pct;
+    matchHead.style.left = pct;
+    setState();
+
+    if (running) rafId = requestAnimationFrame(render);
+  }
+
+  // Match minute as a football clock shows it: 1' … 45' … 90', then 90+n'
+  function matchMinute(t) {
+    const m = Math.floor(t / 60000) + 1;
+    return m > 90 ? `90+${m - 90}'` : `${m}'`;
+  }
+
+  function setState() {
+    toggleBtn.textContent = running ? 'STOP' : (elapsed ? 'RESUME' : 'START');
+    toggleBtn.classList.toggle('running', running);
+    lapBtn.disabled = !running;
+    resetBtn.disabled = running || elapsed === 0;
+    const t = now();
+    stateEl.textContent = running ? `In play · ${matchMinute(t)}`
+      : (t ? `Paused · ${matchMinute(t)}` : 'Ready');
+    stateEl.classList.toggle('live', running);
+  }
+
+  function toggle() {
+    if (running) {
+      elapsed = now(); running = false; cancelAnimationFrame(rafId); render();
+    } else {
+      startTime = performance.now(); running = true; render();
+    }
+  }
+
+  function renderLaps() {
+    if (!laps.length) {
+      lapsEl.innerHTML = '<li class="empty">랩을 기록하면 여기에 표시됩니다</li>';
+      return;
+    }
+    const best = laps.length > 1 ? Math.min(...laps) : -1;
+    const worst = laps.length > 1 ? Math.max(...laps) : -1;
+    let total = 0;
+    const rows = laps.map((split, i) => {
+      total += split;
+      const s = format(split), tt = format(total);
+      const cls = split === best ? 'best' : split === worst ? 'worst' : '';
+      const tag = cls === 'best' ? '<span class="tag">BEST</span>'
+        : cls === 'worst' ? '<span class="tag">SLOW</span>' : '';
+      return `<li class="lap ${cls}"><span class="n">${pad(i + 1)}${tag}</span>` +
+             `<span class="split">${s.main}.${s.cs}</span>` +
+             `<span class="total">${tt.main}.${tt.cs}</span></li>`;
+    });
+    lapsEl.innerHTML = rows.reverse().join('');
+  }
+
+  function lap() {
+    if (!running) return;
+    const total = now();
+    laps.push(total - laps.reduce((a, b) => a + b, 0));
+    renderLaps();
+  }
+
+  function reset() {
+    if (running) return;
+    elapsed = 0; laps = [];
+    renderLaps(); render();
+  }
+
+  // Blur after click so a later Space press isn't also a native button click
+  const onClick = (btn, fn) => btn.addEventListener('click', () => { btn.blur(); fn(); });
+  onClick(toggleBtn, toggle);
+  onClick(lapBtn, lap);
+  onClick(resetBtn, reset);
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); toggle(); }
+    else if (e.key === 'l' || e.key === 'L') lap();
+    else if (e.key === 'r' || e.key === 'R') reset();
+  });
+  render();
+</script>
+</body>
+</html>

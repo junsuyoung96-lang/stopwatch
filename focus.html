@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>La Pausa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c12;
+    --bg-hi: #101824;
+    --ice: #eaf0f6;
+    --silver: #aeb7c4;
+    --muted: #6f7a89;
+    --line: rgba(174, 183, 196, 0.16);
+    --panel: rgba(255, 255, 255, 0.025);
+    --celeste: #8ec5f0;
+    --partial: #aeb7c4;
+    --off: #d58b8b;
+    --serif: "Cormorant Garamond", "Times New Roman", serif;
+    --sans: "Inter", system-ui, "Segoe UI", "Malgun Gothic", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    background: radial-gradient(90% 60% at 50% 0%, var(--bg-hi) 0%, var(--bg) 70%), var(--bg);
+    color: var(--ice); font-family: var(--sans); -webkit-font-smoothing: antialiased;
+    display: flex; justify-content: center; padding: 36px 16px 56px;
+  }
+  main { width: 100%; max-width: 460px; }
+
+  /* Header */
+  header { text-align: center; }
+  .eyebrow {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    font-size: 10px; letter-spacing: 0.34em; color: var(--silver); text-transform: uppercase;
+  }
+  .eyebrow::before, .eyebrow::after { content: ""; width: 32px; height: 1px; background: var(--line); }
+  h1 {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: 34px; margin: 8px 0 4px; letter-spacing: 0.01em;
+  }
+  .sub { font-size: 13px; color: var(--muted); font-weight: 300; margin: 0; }
+
+  /* Objective */
+  .objective {
+    margin: 22px 0 6px; padding: 14px 18px; border: 1px solid var(--line);
+    border-radius: 14px; background: var(--panel);
+  }
+  /* Hangul reads badly when tracked out, so only Latin labels get letter-spacing */
+  .label {
+    font-size: 11px; letter-spacing: 0.02em; color: var(--muted);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .en { font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; }
+  #objective {
+    width: 100%; margin-top: 6px; background: none; border: none; outline: none;
+    color: var(--ice); font: 400 15px/1.5 var(--sans); padding: 0; resize: none;
+    overflow: hidden; display: block;
+  }
+  #objective::placeholder { color: #465060; }
+
+  /* Pitch: centre circle + halfway line */
+  .pitch { position: relative; margin: 8px -16px 0; }
+  .pitch::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent);
+  }
+  .dial { position: relative; width: min(78vw, 300px, 38vh); aspect-ratio: 1; margin: 0 auto; }
+  .dial svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .face { fill: var(--bg); }
+  .readout {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .readout .label { justify-content: center; }
+  #remain {
+    font-weight: 200; font-size: clamp(46px, 14vw, 60px); line-height: 1;
+    font-variant-numeric: tabular-nums; letter-spacing: -0.02em; margin: 10px 0 12px;
+  }
+  #state { font-size: 10px; letter-spacing: 0.3em; color: var(--muted); text-transform: uppercase; }
+  #state.live { color: var(--celeste); }
+
+  /* Match strip: six 15' segments */
+  .strip { margin: 16px auto 0; max-width: 340px; }
+  .segs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
+  .seg { position: relative; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.07); overflow: hidden; }
+  .seg i { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--ice); opacity: 0.55; }
+  .seg.on i { background: var(--celeste); opacity: 1; width: 100%; }
+  .seg.partial i { background: var(--partial); opacity: 1; width: 100%; }
+  .seg.off i { background: var(--off); opacity: 1; width: 100%; }
+  .seg.skip i { background: var(--muted); opacity: 0.5; width: 100%; }
+  .seg-labels {
+    display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 8px;
+    font-size: 9px; letter-spacing: 0.08em; color: var(--muted); font-variant-numeric: tabular-nums;
+  }
+  .seg-labels span { text-align: center; }
+  #matchNo { text-align: center; margin-top: 10px; font-size: 11px; color: var(--muted); }
+  #commit {
+    margin: 14px auto 0; max-width: 340px; text-align: center; font-size: 13px;
+    line-height: 1.5; color: var(--ice);
+  }
+  #commit .k { color: var(--celeste); font-size: 11px; margin-right: 6px; }
+  .ck-prev { margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .ck-prev b { color: var(--silver); font-weight: 500; }
+
+  /* Controls */
+  .controls { display: flex; justify-content: center; align-items: center; gap: 24px; margin-top: 20px; }
+  button { font-family: var(--sans); cursor: pointer; color: var(--ice); transition: transform .15s, opacity .2s, border-color .2s, background .2s; }
+  button:active { transform: scale(0.97); }
+  button:disabled { opacity: 0.3; cursor: default; transform: none; }
+  .round {
+    width: 64px; height: 64px; border-radius: 50%; background: transparent;
+    border: 1px solid var(--line); font-size: 11px; letter-spacing: 0.08em;
+  }
+  .round:not(:disabled):hover { border-color: var(--silver); }
+  #toggle {
+    width: 84px; height: 84px; border-radius: 50%; border: none;
+    background: linear-gradient(160deg, #ffffff, #c9d3df 55%, #8f9bab);
+    color: #0b1119; font-size: 13px; font-weight: 600; letter-spacing: 0.06em;
+    box-shadow: 0 12px 34px rgba(142, 197, 240, 0.16), inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+  #toggle.running { background: transparent; color: var(--ice); box-shadow: inset 0 0 0 1px var(--silver); }
+
+  .options {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 22px;
+  }
+  .chip {
+    border: 1px solid var(--line); background: transparent; border-radius: 999px;
+    padding: 7px 12px; font-size: 11px; color: var(--silver); letter-spacing: 0.04em;
+  }
+  .chip[aria-pressed="true"] { color: var(--ice); border-color: rgba(142,197,240,0.5); }
+  .chip:hover { border-color: var(--silver); }
+
+  /* Log */
+  .log { margin-top: 36px; }
+  .log-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 10px; border-bottom: 1px solid var(--line);
+  }
+  .log-head button { background: none; border: none; color: var(--muted); font-size: 11px; padding: 0; }
+  .log-head button:hover { color: var(--ice); }
+  ol { list-style: none; margin: 0; padding: 0; }
+  .entry {
+    display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 14px 2px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .entry .min { font-size: 15px; font-weight: 300; font-variant-numeric: tabular-nums; color: var(--silver); }
+  .entry .doing { font-size: 14px; line-height: 1.45; }
+  .entry .next { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.45; }
+  .entry .next b { font-weight: 500; color: var(--silver); }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 10px; letter-spacing: 0.14em;
+    color: var(--muted); margin-bottom: 4px; text-transform: uppercase;
+  }
+  .badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .badge.on { color: var(--celeste); }
+  .badge.partial { color: var(--partial); }
+  .badge.off { color: var(--off); }
+  .empty { padding: 18px 2px; color: var(--muted); font-size: 13px; text-align: center; }
+
+  footer { margin-top: 40px; text-align: center; color: var(--muted); font-size: 12px; line-height: 1.7; }
+  footer .quote { font-size: 15px; font-weight: 300; color: var(--silver); margin-bottom: 4px; }
+  footer .keys { margin-top: 12px; font-size: 11px; opacity: 0.8; }
+  kbd { font-family: var(--sans); font-size: 10px; border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; color: var(--ice); }
+  @media (hover: none) { footer .keys { display: none; } }
+
+  /* Check-in dialog */
+  dialog {
+    width: min(92vw, 440px); padding: 0; border: 1px solid var(--line); border-radius: 20px;
+    background: #0d141e; color: var(--ice); box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+  }
+  dialog::backdrop { background: rgba(4, 7, 11, 0.72); backdrop-filter: blur(6px); }
+  dialog[open] { animation: rise .35s cubic-bezier(.2,.8,.2,1); }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } }
+  .ck { padding: 26px 24px 22px; }
+  .ck-min { font-weight: 200; font-size: 44px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .ck-title { font-size: 12px; color: var(--celeste); margin-top: 10px; }
+  .ck-obj {
+    margin: 18px 0 4px; padding: 12px 14px; border-left: 2px solid var(--celeste);
+    background: rgba(142,197,240,0.05); font-size: 14px; line-height: 1.5; color: var(--ice);
+    border-radius: 0 8px 8px 0;
+  }
+  .ck-obj.none { color: var(--muted); border-left-color: var(--muted); background: var(--panel); }
+  /* No serif/italic here: the Latin serif has no Hangul and would fall back to a faux italic */
+  .ck-prompt { font-size: 15px; font-weight: 300; line-height: 1.5; color: var(--silver); margin: 16px 0 4px; }
+  .ck-prompt::before { content: "Q."; font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--celeste); margin-right: 8px; }
+  .field { margin-top: 16px; }
+  .field label { display: block; font-size: 12px; color: var(--silver); margin-bottom: 8px; }
+  .field input {
+    width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--line);
+    color: var(--ice); font: 400 15px var(--sans); padding: 6px 0 8px; outline: none;
+  }
+  .field input:focus { border-bottom-color: var(--celeste); }
+  .seg-choice { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .seg-choice button {
+    border: 1px solid var(--line); background: transparent; border-radius: 10px;
+    padding: 10px 0; font-size: 13px; color: var(--silver);
+  }
+  .seg-choice button[aria-pressed="true"][data-v="on"] { border-color: var(--celeste); color: var(--celeste); background: rgba(142,197,240,0.06); }
+  .seg-choice button[aria-pressed="true"][data-v="partial"] { border-color: var(--partial); color: var(--ice); background: rgba(174,183,196,0.06); }
+  .seg-choice button[aria-pressed="true"][data-v="off"] { border-color: var(--off); color: var(--off); background: rgba(213,139,139,0.06); }
+  .ck-actions { display: flex; gap: 10px; margin-top: 24px; }
+  .ck-actions button { flex: 1; padding: 13px 0; border-radius: 12px; font-size: 14px; }
+  #ckSkip { background: transparent; border: 1px solid var(--line); color: var(--silver); }
+  #ckSave { background: var(--ice); border: none; color: #0b1119; font-weight: 600; }
+  .ck-note { margin-top: 12px; font-size: 11px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">Nº 10 · Every 15'</div>
+    <h1>La Pausa</h1>
+    <p class="sub">15분마다 고개를 들고, 경기 전체를 읽는다</p>
+  </header>
+
+  <section class="objective">
+    <div class="label"><span>이 작업의 목적</span><span class="en">Objective</span></div>
+    <textarea id="objective" rows="1" maxlength="140"
+      placeholder="예: 원가절감 기회 3가지를 임원 보고용 한 장으로 정리"></textarea>
+  </section>
+
+  <div class="pitch">
+    <div class="dial">
+      <svg viewBox="0 0 400 400" aria-hidden="true">
+        <defs>
+          <linearGradient id="ice" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset="1" stop-color="#8ec5f0"/>
+          </linearGradient>
+        </defs>
+        <circle class="face" cx="200" cy="200" r="190"/>
+        <circle cx="200" cy="200" r="190" fill="none" stroke="rgba(174,183,196,0.16)"/>
+        <g id="ticks"></g>
+        <circle cx="200" cy="200" r="160" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+        <circle id="arc" cx="200" cy="200" r="160" fill="none" stroke="url(#ice)" stroke-width="2"
+                stroke-linecap="round" transform="rotate(-90 200 200)"/>
+        <circle id="dot" cx="200" cy="40" r="4" fill="#ffffff"/>
+      </svg>
+      <div class="readout">
+        <div class="label"><span id="nextLabel">다음 체크 · 15'</span></div>
+        <div id="remain">15:00</div>
+        <div id="state">Ready</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip" aria-label="15분 구간">
+    <div class="segs" id="segs"></div>
+    <div class="seg-labels" id="segLabels"></div>
+    <div id="matchNo"></div>
+    <div id="commit" hidden></div>
+  </div>
+
+  <div class="controls">
+    <button id="checkNow" class="round" disabled>지금<br>체크</button>
+    <button id="toggle">시작</button>
+    <button id="reset" class="round" disabled>초기화</button>
+  </div>
+
+  <div class="options">
+    <button class="chip" id="sound" aria-pressed="true">사운드 켜짐</button>
+    <button class="chip" id="test">사운드 미리듣기</button>
+    <button class="chip" id="notify" aria-pressed="false">데스크톱 알림</button>
+  </div>
+
+  <section class="log">
+    <div class="log-head">
+      <span class="label">체크포인트 기록</span>
+      <button id="clearLog">기록 지우기</button>
+    </div>
+    <ol id="log"></ol>
+  </section>
+
+  <footer>
+    <div class="quote">걷는 동안, 그는 경기 전체를 읽는다.</div>
+    과르디올라는 메시가 경기 대부분을 걸으며 상대의 움직임과 위치를 살핀다고 말했다.
+    <div class="keys"><kbd>Space</kbd> 시작/일시정지 · <kbd>C</kbd> 지금 체크 · <kbd>R</kbd> 초기화</div>
+  </footer>
+</main>
+
+<dialog id="checkin" aria-labelledby="ckTitle">
+  <form class="ck" method="dialog" id="ckForm">
+    <div class="ck-min" id="ckMin">15'</div>
+    <div class="ck-title" id="ckTitle">체크포인트 · 고개를 드세요</div>
+    <div class="ck-obj" id="ckObj"></div>
+    <div class="ck-prev" id="ckPrev" hidden></div>
+    <div class="ck-prompt" id="ckPrompt"></div>
+    <div class="field">
+      <label for="ckDoing">지난 15분, 무엇을 했나요?</label>
+      <input id="ckDoing" autocomplete="off" maxlength="120" placeholder="한 줄로">
+    </div>
+    <div class="field">
+      <label>목적에 직접 기여했나요?</label>
+      <div class="seg-choice" id="ckAlign">
+        <button type="button" data-v="on" aria-pressed="false">직결</button>
+        <button type="button" data-v="partial" aria-pressed="false">부분</button>
+        <button type="button" data-v="off" aria-pressed="false">벗어남</button>
+      </div>
+    </div>
+    <div class="field">
+      <label for="ckNext">So what — 다음 15분의 결과물 하나는?</label>
+      <input id="ckNext" autocomplete="off" maxlength="120" placeholder="예: 3번 장표 헤드라인 확정">
+    </div>
+    <div class="ck-actions">
+      <button type="button" id="ckSkip">건너뛰기</button>
+      <button type="submit" id="ckSave">기록하고 계속</button>
+    </div>
+    <div class="ck-note">타이머는 멈추지 않고 다음 15분을 이미 세고 있어요</div>
+  </form>
+</dialog>
+
+<script>
+  const INTERVAL = 15 * 60 * 1000;
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = id => document.getElementById(id);
+  const pad = n => String(n).padStart(2, '0');
+
+  // --- Storage (best effort; page works without it) ---
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem('lapausa.' + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+    set(k, v) { try { localStorage.setItem('lapausa.' + k, JSON.stringify(v)); } catch {} }
+  };
+
+  // --- Dial: one tick per minute, longer at 5' ---
+  const ticks = $('ticks');
+  for (let i = 0; i < 15; i++) {
+    const a = (i / 15) * Math.PI * 2, major = i % 5 === 0;
+    const r1 = 182, r2 = major ? 166 : 174;
+    const l = document.createElementNS(NS, 'line');
+    l.setAttribute('x1', 200 + r1 * Math.sin(a)); l.setAttribute('y1', 200 - r1 * Math.cos(a));
+    l.setAttribute('x2', 200 + r2 * Math.sin(a)); l.setAttribute('y2', 200 - r2 * Math.cos(a));
+    l.setAttribute('stroke', major ? '#eaf0f6' : 'rgba(174,183,196,0.45)');
+    l.setAttribute('stroke-width', major ? 1.6 : 1);
+    ticks.appendChild(l);
+  }
+  const R = 160, C = 2 * Math.PI * R;
+  const arc = $('arc'), dot = $('dot');
+  arc.setAttribute('stroke-dasharray', C);
+
+  // --- Match strip: 0–15, 16–30 … 76–90 ---
+  const segs = $('segs'), segLabels = $('segLabels');
+  ['0–15', '16–30', '31–45', '46–60', '61–75', '76–90'].forEach(t => {
+    const s = document.createElement('div'); s.className = 'seg'; s.innerHTML = '<i></i>'; segs.appendChild(s);
+    const l = document.createElement('span'); l.textContent = t; segLabels.appendChild(l);
+  });
+
+  // --- State ---
+  let running = false, startedAt = 0, acc = 0, nextCheck = INTERVAL, timer = null;
+  let log = store.get('log', []);         // [{min, doing, align, next, at}]
+  let soundOn = store.get('sound', true);
+  let session = Date.now();               // the strip only shows this run's checkpoints
+  const objectiveEl = $('objective');
+  objectiveEl.value = store.get('objective', '');
+  const grow = () => { objectiveEl.style.height = 'auto'; objectiveEl.style.height = objectiveEl.scrollHeight + 'px'; };
+  objectiveEl.addEventListener('input', () => { store.set('objective', objectiveEl.value); grow(); });
+  grow();
+
+  const elapsed = () => acc + (running ? Date.now() - startedAt : 0);
+  const fmt = ms => { const s = Math.max(0, Math.ceil(ms / 1000)); return pad(Math.floor(s / 60)) + ':' + pad(s % 60); };
+
+  function render() {
+    const t = elapsed();
+    if (running && t >= nextCheck) {
+      const k = Math.round(nextCheck / INTERVAL);
+      while (nextCheck <= t) nextCheck += INTERVAL; // after sleep, fire once and realign
+      checkpoint(k * 15, true);
+    }
+    const remain = nextCheck - t;
+    $('remain').textContent = fmt(remain);
+    $('nextLabel').textContent = `다음 체크 · ${Math.round(nextCheck / 60000)}'`;
+
+    const frac = 1 - remain / INTERVAL;
+    arc.setAttribute('stroke-dashoffset', C * (1 - frac));
+    const a = frac * Math.PI * 2;
+    dot.setAttribute('cx', 200 + R * Math.sin(a)); dot.setAttribute('cy', 200 - R * Math.cos(a));
+
+    // strip: which 90' match and which 15' block are we in
+    const block = Math.floor(t / INTERVAL);
+    const match = Math.floor(block / 6);
+    [...segs.children].forEach((s, i) => {
+      const b = match * 6 + i, e = log.find(x => x.session === session && x.block === b);
+      s.className = 'seg' + (e ? ' ' + e.align : '');
+      const fill = s.firstChild;
+      if (!e) fill.style.width = b < block ? '100%' : b === block ? frac * 100 + '%' : '0';
+      else fill.style.width = '';
+    });
+    $('matchNo').innerHTML = `<span class="en">Match ${match + 1}</span> &nbsp;·&nbsp; ${Math.floor(t / 60000)}분 경과`;
+
+    $('state').textContent = running ? 'In play' : (t ? 'Paused' : 'Ready');
+    $('state').classList.toggle('live', running);
+    $('toggle').textContent = running ? '일시정지' : (t ? '재개' : '시작');
+    $('toggle').classList.toggle('running', running);
+    $('checkNow').disabled = !t;
+    $('reset').disabled = running || !t;
+    document.title = running ? `${fmt(remain)} · La Pausa` : 'La Pausa';
+  }
+
+  function toggle() {
+    if (running) { acc = elapsed(); running = false; }
+    else { startedAt = Date.now(); running = true; unlockAudio(); }
+    render();
+  }
+
+  function reset() {
+    if (running) return;
+    acc = 0; nextCheck = INTERVAL; session = Date.now(); renderCommit(); render();
+  }
+
+  // --- Sound: glassy two-note chime, synthesized ---
+  let ctx = null;
+  function unlockAudio() {
+    try { ctx = ctx || new (window.AudioContext || window.webkitAudioContext)(); ctx.resume(); } catch {}
+  }
+  function chime() {
+    if (!soundOn) return;
+    unlockAudio(); if (!ctx) return;
+    const t0 = ctx.currentTime;
+    const note = (f, at, dur, vol) => {
+      [1, 2.76].forEach((h, j) => {            // fundamental + bell partial
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sine'; o.frequency.value = f * h;
+        g.gain.setValueAtTime(0, t0 + at);
+        g.gain.linearRampToValueAtTime(vol / (j ? 4 : 1), t0 + at + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + at + dur);
+        o.connect(g).connect(ctx.destination); o.start(t0 + at); o.stop(t0 + at + dur);
+      });
+    };
+    note(1318.5, 0, 2.2, 0.12);   // E6
+    note(987.8, 0.28, 2.8, 0.10); // B5
+  }
+
+  // --- Desktop notification ---
+  const notifyBtn = $('notify');
+  const notifyState = () => {
+    const ok = 'Notification' in window && Notification.permission === 'granted';
+    notifyBtn.setAttribute('aria-pressed', ok);
+    notifyBtn.textContent = ok ? '데스크톱 알림 켜짐' : 'Notification' in window && Notification.permission === 'denied'
+      ? '알림 차단됨 (브라우저 설정)' : '데스크톱 알림 켜기';
+  };
+  notifyBtn.addEventListener('click', async () => {
+    if (!('Notification' in window)) return;
+    try { await Notification.requestPermission(); } catch {}
+    notifyState();
+  });
+
+  // --- Check-in ---
+  const PROMPTS = [
+    '지금 이 일은 가장 중요한 질문에 답하고 있나요?',
+    '임원에게 한 문장으로 말한다면, 지금의 결론은?',
+    '80/20 — 지금 하는 일이 결과의 80%를 만드는 20%인가요?',
+    '완벽 대신 충분히 좋은 수준은 어디까지인가요?',
+    '디테일에서 한 걸음 물러서면, 무엇이 보이나요?',
+    '이 작업이 끝나면 누가, 무엇을 결정하게 되나요?'
+  ];
+  const dlg = $('checkin');
+  let pending = null, align = null;
+
+  function checkpoint(min, auto) {
+    const block = Math.max(0, Math.round(min / 15) - 1);
+    pending = { min, block };
+    $('ckMin').textContent = min + "'";
+    $('ckTitle').textContent = auto ? '체크포인트 · 고개를 드세요' : '수동 체크 · 고개를 드세요';
+    const obj = objectiveEl.value.trim();
+    $('ckObj').textContent = obj || '목적이 비어 있어요. 이 작업이 끝나면 무엇이 달라지나요?';
+    $('ckObj').classList.toggle('none', !obj);
+    $('ckPrompt').textContent = PROMPTS[(log.length + block) % PROMPTS.length];
+    const prev = lastCommit();
+    $('ckPrev').hidden = !prev;
+    if (prev) {
+      $('ckPrev').innerHTML = '<b>직전 약속</b> · <span></span> — 지켰나요?';
+      $('ckPrev').querySelector('span').textContent = prev;
+    }
+    $('ckDoing').value = ''; $('ckNext').value = ''; setAlign(null);
+    if (!dlg.open) dlg.showModal();
+    setTimeout(() => $('ckDoing').focus(), 50);
+    if (auto) {
+      chime();
+      if (document.hidden && 'Notification' in window && Notification.permission === 'granted') {
+        try { new Notification(`${min}' 체크포인트`, { body: obj || '고개를 들고, 목적을 다시 보세요.', silent: true }); } catch {}
+      }
+    }
+  }
+  function setAlign(v) {
+    align = v;
+    [...$('ckAlign').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v));
+  }
+  $('ckAlign').addEventListener('click', e => { if (e.target.dataset.v) setAlign(e.target.dataset.v); });
+  $('ckForm').addEventListener('submit', () => {
+    log = log.filter(x => !(x.session === session && x.block === pending.block));
+    log.push({ ...pending, session, doing: $('ckDoing').value.trim(), next: $('ckNext').value.trim(),
+               align: align || 'partial', at: Date.now() });
+    store.set('log', log); renderLog(); render();
+  });
+  $('ckSkip').addEventListener('click', () => dlg.close());
+  $('checkNow').addEventListener('click', () => {
+    const t = elapsed(); checkpoint(Math.max(15, Math.ceil(t / INTERVAL) * 15), false);
+  });
+
+  // The "so what" promised at the last check-in of this run
+  function lastCommit() {
+    const mine = log.filter(x => x.session === session && x.next);
+    return mine.length ? mine.sort((a, b) => b.at - a.at)[0].next : '';
+  }
+  function renderCommit() {
+    const c = lastCommit(), el = $('commit');
+    el.hidden = !c;
+    if (c) { el.innerHTML = '<span class="k">이번 15분의 결과물</span><span></span>'; el.lastChild.textContent = c; }
+  }
+
+  const ALIGN = { on: '직결', partial: '부분', off: '벗어남' };
+  function renderLog() {
+    renderCommit();
+    const el = $('log');
+    if (!log.length) { el.innerHTML = '<li class="empty">15분이 지나면 첫 체크포인트가 여기에 쌓여요</li>'; return; }
+    el.innerHTML = '';
+    [...log].sort((a, b) => b.at - a.at).forEach(e => {
+      const li = document.createElement('li'); li.className = 'entry';
+      li.innerHTML = `<div class="min"></div><div><div class="badge ${e.align}"></div>` +
+        `<div class="doing"></div>${e.next ? '<div class="next"><b>다음 →</b> <span></span></div>' : ''}</div>`;
+      li.querySelector('.min').textContent = e.min + "'";
+      li.querySelector('.badge').textContent = ALIGN[e.align];
+      li.querySelector('.doing').textContent = e.doing || '(기록 없음)';
+      if (e.next) li.querySelector('.next span').textContent = e.next;
+      el.appendChild(li);
+    });
+  }
+  $('clearLog').addEventListener('click', () => {
+    if (!log.length || !confirm('체크포인트 기록을 모두 지울까요?')) return;
+    log = []; store.set('log', log); renderLog(); render();
+  });
+
+  // --- Controls ---
+  const soundBtn = $('sound');
+  const soundState = () => { soundBtn.setAttribute('aria-pressed', soundOn); soundBtn.textContent = soundOn ? '사운드 켜짐' : '사운드 꺼짐'; };
+  soundBtn.addEventListener('click', () => { soundOn = !soundOn; store.set('sound', soundOn); soundState(); });
+  $('test').addEventListener('click', () => { const s = soundOn; soundOn = true; chime(); soundOn = s; });
+
+  const onClick = (id, fn) => $(id).addEventListener('click', e => { e.currentTarget.blur(); fn(); });
+  onClick('toggle', toggle);
+  onClick('reset', reset);
+  document.addEventListener('keydown', e => {
+    if (dlg.open || e.target.matches('input, textarea')) return;
+    if (e.code === 'Space') { e.preventDefault(); toggle(); }
+    else if (e.key === 'c' || e.key === 'C') { if (elapsed()) $('checkNow').click(); }
+    else if (e.key === 'r' || e.key === 'R') reset();
+  });
+
+  soundState(); notifyState(); renderLog(); render();
+  setInterval(render, 250);
+</script>
+</body>
+</html>
