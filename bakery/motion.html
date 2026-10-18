@@ -1,0 +1,396 @@
+<title>둔촌 아침빵 30초 브리핑</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one 16:9 stage (1920x1080 units) scaled to the page width; controls + chapter rail + sources below. Single committed "oven at dawn" look. */
+:root {
+  --crust: #1f1712;      /* page ground: dark rye crust */
+  --crumb: #2c221b;      /* stage panels */
+  --flour: #f3ece2;      /* main text */
+  --dust: #b8a99a;       /* secondary text */
+  --butter: #f2b53a;     /* accent: butter / dawn */
+  --sage: #8fb8a2;       /* data good */
+  --ember: #e07a5f;      /* warning */
+  --line: #4a3b30;
+  --display: "Black Han Sans", "IBM Plex Sans KR", system-ui, sans-serif;
+  --body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  color-scheme: dark;
+}
+html, body { background: var(--crust); color: var(--flour); }
+body { font-family: var(--body); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px; }
+.wrap { max-width: 1200px; margin: 0 auto; display: grid; gap: 16px; }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
+.head h1 { font-family: var(--display); font-weight: 400; font-size: clamp(20px, 3vw, 28px); margin: 0; letter-spacing: .01em; text-wrap: balance; }
+.head p { margin: 0; color: var(--dust); font-size: 13px; }
+
+.frame { position: relative; width: 100%; aspect-ratio: 16 / 9; max-width: 100%; overflow: hidden; border-radius: 10px; background: var(--crumb); }
+#stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; background: radial-gradient(1200px 700px at 80% 110%, #3a2a1c 0%, var(--crumb) 60%); overflow: hidden; }
+.scene { position: absolute; inset: 0; opacity: 0; }
+.scene.rest { opacity: 1; }
+.tag { position: absolute; left: 96px; bottom: 64px; font-family: var(--mono); font-size: 22px; color: var(--dust); letter-spacing: .02em; }
+.kicker { font-family: var(--mono); font-size: 26px; color: var(--butter); letter-spacing: .12em; text-transform: uppercase; }
+.big { font-family: var(--display); font-weight: 400; color: var(--flour); line-height: 1.12; letter-spacing: -.005em; }
+.note { color: var(--dust); font-size: 34px; line-height: 1.45; }
+.paren { color: var(--dust); font-size: .7em; }
+
+/* S1 */
+#s1 .t { position: absolute; left: 96px; top: 300px; font-size: 128px; width: 1500px; }
+#s1 .k { position: absolute; left: 100px; top: 220px; }
+#s1 .sub { position: absolute; left: 100px; top: 640px; font-size: 40px; color: var(--dust); }
+#s1 .sun { position: absolute; right: -160px; bottom: -260px; width: 760px; height: 760px; border-radius: 50%; background: radial-gradient(circle, var(--butter) 0%, #c9852a 45%, rgba(201,133,42,0) 70%); opacity: .55; }
+
+/* S2 flow */
+#s2 .k { position: absolute; left: 100px; top: 110px; }
+#s2 .h { position: absolute; left: 96px; top: 160px; font-size: 76px; }
+.flow { position: absolute; left: 96px; right: 96px; top: 330px; height: 470px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; align-items: end; }
+.col { display: grid; gap: 22px; justify-items: center; }
+.bar { width: 170px; border-radius: 14px 14px 4px 4px; background: var(--sage); transform-origin: bottom; }
+.bar.low { background: var(--butter); }
+.col .lab { font-size: 40px; font-weight: 700; }
+.col .lab small { display: block; font-size: 26px; font-weight: 400; color: var(--dust); text-align: center; }
+#s2 .arrowline { position: absolute; left: 330px; right: 520px; top: 345px; height: 6px; background: var(--sage); transform-origin: left; border-radius: 3px; }
+#s2 .cap { position: absolute; left: 96px; top: 860px; font-size: 44px; font-weight: 700; }
+#s2 .cap b { color: var(--butter); }
+
+/* S3 split */
+#s3 .k { position: absolute; left: 100px; top: 110px; }
+#s3 .h { position: absolute; left: 96px; top: 160px; font-size: 76px; }
+.split { position: absolute; left: 96px; right: 96px; top: 330px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+.card { background: rgba(0,0,0,.22); border: 2px solid var(--line); border-radius: 18px; padding: 44px 48px; display: grid; gap: 18px; }
+.card h3 { margin: 0; font-size: 48px; }
+.card .num { font-family: var(--display); font-size: 108px; line-height: 1; }
+.card.visit .num { color: var(--ember); }
+.card.live .num { color: var(--sage); }
+.card p { margin: 0; font-size: 32px; color: var(--dust); line-height: 1.45; }
+#s3 .cap { position: absolute; left: 96px; top: 780px; font-size: 40px; font-weight: 700; }
+
+/* S4 funnel */
+#s4 .k { position: absolute; left: 100px; top: 110px; }
+#s4 .h { position: absolute; left: 96px; top: 160px; font-size: 76px; }
+.cands { position: absolute; left: 96px; top: 330px; width: 820px; display: grid; gap: 14px; }
+.cand { font-size: 36px; display: flex; justify-content: space-between; border-bottom: 2px solid var(--line); padding-bottom: 10px; }
+.cand span:last-child { color: var(--dust); font-size: 28px; font-family: var(--mono); }
+.cand.bench span:last-child { color: var(--ember); }
+.picks { position: absolute; left: 1020px; top: 330px; width: 800px; display: grid; gap: 26px; }
+.pick { display: grid; grid-template-columns: 120px 1fr; align-items: center; background: rgba(0,0,0,.22); border-radius: 16px; padding: 26px 32px; border: 2px solid var(--line); }
+.pick .r { font-family: var(--display); font-size: 92px; color: var(--butter); line-height: 1; }
+.pick .n { font-size: 50px; font-weight: 700; }
+.pick .n small { display: block; font-size: 28px; color: var(--dust); font-weight: 400; margin-top: 6px; }
+.pick.first { border-color: var(--butter); }
+
+/* S5 Dunchon */
+#s5 .k { position: absolute; left: 100px; top: 110px; }
+#s5 .h { position: absolute; left: 96px; top: 160px; font-size: 76px; }
+.hb { position: absolute; left: 96px; top: 340px; width: 1000px; display: grid; gap: 40px; }
+.hrow { display: grid; grid-template-columns: 200px 1fr; align-items: center; gap: 24px; font-size: 38px; font-weight: 700; }
+.htrack { position: relative; height: 84px; }
+.hfill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 8px; transform-origin: left; }
+.hval { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--display); font-size: 56px; font-weight: 400; }
+.gapnote { font-size: 32px; color: var(--butter); padding-left: 224px; }
+.rent { position: absolute; left: 1180px; top: 330px; width: 644px; display: grid; gap: 30px; }
+.rent .box { background: rgba(0,0,0,.22); border: 2px solid var(--line); border-radius: 16px; padding: 30px 36px; }
+.rent .lbl { font-size: 28px; color: var(--dust); }
+.rent .val { font-family: var(--display); font-size: 64px; line-height: 1.1; }
+.rent .val .down { color: var(--sage); }
+
+/* S6 concept */
+#s6 .k { position: absolute; left: 100px; top: 110px; }
+#s6 .h { position: absolute; left: 96px; top: 160px; font-size: 84px; width: 1700px; }
+#s6 .h em { font-style: normal; color: var(--butter); }
+#s6 .one { position: absolute; left: 100px; top: 290px; font-size: 36px; color: var(--dust); }
+.three { position: absolute; left: 96px; right: 96px; top: 420px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.three .c { border-top: 8px solid var(--sage); background: rgba(0,0,0,.22); border-radius: 0 0 16px 16px; padding: 34px 38px; display: grid; gap: 16px; align-content: start; }
+.three .c { min-height: 420px; }
+.three .c.fix { border-top-color: var(--butter); }
+.three .c.new { border-top-color: var(--ember); }
+.three h4 { margin: 0; font-size: 44px; }
+.three ul { margin: 0; padding-left: 34px; font-size: 38px; line-height: 1.6; color: var(--flour); }
+.three li span { color: var(--dust); }
+
+/* S7 risk + close */
+#s7 .k { position: absolute; left: 100px; top: 110px; color: var(--ember); }
+#s7 .h { position: absolute; left: 96px; top: 160px; font-size: 76px; width: 1700px; }
+.risk { position: absolute; left: 96px; right: 96px; top: 340px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.risk .box { background: rgba(0,0,0,.22); border: 2px solid var(--line); border-radius: 16px; padding: 34px 40px; font-size: 34px; line-height: 1.5; }
+.risk .box b { color: var(--butter); }
+.risk .box.bad b { color: var(--ember); }
+#s7 .end { position: absolute; left: 96px; top: 680px; font-family: var(--display); font-size: 70px; color: var(--butter); }
+
+/* progress */
+#prog { position: absolute; left: 0; bottom: 0; height: 8px; width: 100%; background: var(--butter); transform-origin: left; transform: scaleX(0); opacity: .9; }
+
+/* controls */
+.ctrl { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.ctrl button { font: 500 15px var(--body); color: var(--crust); background: var(--butter); border: 0; border-radius: 999px; padding: 9px 18px; cursor: pointer; }
+.ctrl button.ghost { background: transparent; color: var(--flour); border: 1.5px solid var(--line); }
+.ctrl button:focus-visible { outline: 3px solid var(--sage); outline-offset: 2px; }
+.ctrl .time { font-family: var(--mono); font-size: 14px; color: var(--dust); margin-left: auto; font-variant-numeric: tabular-nums; }
+.rail { display: flex; flex-wrap: wrap; gap: 6px; }
+.rail button { font: 400 13px var(--body); color: var(--dust); background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+.rail button.on { color: var(--crust); background: var(--flour); border-color: var(--flour); }
+.rail button:focus-visible { outline: 2px solid var(--butter); outline-offset: 2px; }
+.src { color: var(--dust); font-size: 13px; line-height: 1.6; border-top: 1px solid var(--line); padding-top: 12px; }
+.src a { color: var(--flour); }
+.src p { margin: 0 0 6px; }
+</style>
+
+<div class="wrap">
+  <div class="head">
+    <h1>둔촌 아침빵 30초 브리핑</h1>
+    <p>서울 베이커리 창업 · 상권 3곳 + 1순위 컨셉 · 2026-10-18 기준</p>
+  </div>
+
+  <div class="frame" id="frame">
+    <div id="stage" aria-label="30초 모션 요약">
+      <!-- S1 -->
+      <section class="scene rest" id="s1">
+        <div class="sun"></div>
+        <div class="kicker k">Where to play · How to play</div>
+        <div class="big t">서울에서 빵집,<br>어디서 어떻게 이길까</div>
+        <div class="sub">앞으로 3년 뜰 상권 3곳과 1순위 매장 컨셉</div>
+      </section>
+
+      <!-- S2 -->
+      <section class="scene" id="s2">
+        <div class="kicker k">1 · 뜬다의 정의</div>
+        <div class="big h">"뜬다"는 4단계 신호로 잰다</div>
+        <div class="flow">
+          <div class="col"><div class="bar" style="height:220px"></div><div class="lab">관심<small>검색·SNS</small></div></div>
+          <div class="col"><div class="bar" style="height:270px"></div><div class="lab">방문<small>유동인구·지하철</small></div></div>
+          <div class="col"><div class="bar" style="height:320px"></div><div class="lab">소비<small>카드 결제</small></div></div>
+          <div class="col"><div class="bar low" style="height:110px"></div><div class="lab">임대료<small>가게 월세</small></div></div>
+        </div>
+        <div class="cap">앞의 3개는 오르고 <b>월세는 아직 덜 오른 곳</b> = 들어갈 때</div>
+        <div class="tag">가설: 신호 순서 · 근거 [F14] 2025년 서울은 핫플만 임대료 상승</div>
+      </section>
+
+      <!-- S3 -->
+      <section class="scene" id="s3">
+        <div class="kicker k">2 · 뜨는 곳은 두 종류</div>
+        <div class="big h">놀러 오는 곳 vs 살러 오는 곳</div>
+        <div class="split">
+          <div class="card visit">
+            <h3>방문형 <span class="paren">(성수·용리단길)</span></h3>
+            <div class="num">월세 2~4배</div>
+            <p>바이럴로 손님이 몰리지만 월세가 이미 많이 올랐다</p>
+          </div>
+          <div class="card live">
+            <h3>거주형 <span class="paren">(재건축 새 단지)</span></h3>
+            <div class="num">사람 +45.5%</div>
+            <p>매일 오는 주민이 늘어난다. 빵은 매일 사는 물건</p>
+          </div>
+        </div>
+        <div class="cap">그래서 3곳 = 거주형 2곳 + 방문형 1곳</div>
+        <div class="tag">[N7] 용리단길 3년 새 3~4배 · [N8] 성수 2023 대비 2~3배 · [N1] 둔촌 2020.4Q→2025.4Q</div>
+      </section>
+
+      <!-- S4 -->
+      <section class="scene" id="s4">
+        <div class="kicker k">3 · 상권 8곳 → 3곳</div>
+        <div class="big h">숫자가 공개된 8곳을 걸렀다</div>
+        <div class="cands">
+          <div class="cand c-keep"><span>둔촌동</span><span>사람 +45.5%</span></div>
+          <div class="cand c-keep"><span>이문동</span><span>사람 +39.4%</span></div>
+          <div class="cand c-keep"><span>신당동</span><span>매출 +117%</span></div>
+          <div class="cand c-drop"><span>광희동</span><span>신당 보조</span></div>
+          <div class="cand c-drop"><span>청량리역</span><span>기간 불명확</span></div>
+          <div class="cand c-drop"><span>잠원동</span><span>사람 +9.9%</span></div>
+          <div class="cand c-drop bench"><span>신용산</span><span>비교 기준</span></div>
+          <div class="cand c-drop bench"><span>성수</span><span>비교 기준</span></div>
+        </div>
+        <div class="picks">
+          <div class="pick first"><div class="r">1</div><div class="n">둔촌동 <small>거주형 · 월세는 오히려 하락</small></div></div>
+          <div class="pick"><div class="r">2</div><div class="n">이문동 <small>거주형 · 약 7,400세대 입주 진행</small></div></div>
+          <div class="pick"><div class="r">3</div><div class="n">신당동 <small>방문형 · 월세가 성수보다 낮음</small></div></div>
+        </div>
+        <div class="tag">[N1][N3][N4][N5][N7][N8][N12] 출처·기간이 달라 신당·성수·용산은 방향만 비교</div>
+      </section>
+
+      <!-- S5 -->
+      <section class="scene" id="s5">
+        <div class="kicker k">4 · 1순위 둔촌동</div>
+        <div class="big h">사람은 빨리 늘고, 월세는 내려간다</div>
+        <div class="hb">
+          <div class="hrow"><span>사람</span><div class="htrack"><div class="hfill" id="f-people" style="width:600px;background:var(--sage)"></div><div class="hval" id="v-people" style="left:620px">+45.5%</div></div></div>
+          <div class="hrow"><span>소비</span><div class="htrack"><div class="hfill" id="f-spend" style="width:245px;background:var(--butter)"></div><div class="hval" id="v-spend" style="left:265px">+18.6%</div></div></div>
+          <div class="gapnote" id="gapnote">차이 = 앞으로 3년 동안 동네 안에서 채워질 소비 (추론)</div>
+        </div>
+        <div class="rent">
+          <div class="box"><div class="lbl">1층 월세 (평당)</div><div class="val">90~100 → <span class="down">60~70만</span></div></div>
+          <div class="box"><div class="lbl">새로 들어온 가구</div><div class="val"><span id="hh">12,000</span>가구</div></div>
+          <div class="box"><div class="lbl">1층 빈 가게</div><div class="val">30% 이상</div></div>
+        </div>
+        <div class="tag">[N1] 서울시 상권분석서비스(아주경제 2026.05) · [N2] 헤럴드경제 2025.08 르포</div>
+      </section>
+
+      <!-- S6 -->
+      <section class="scene" id="s6">
+        <div class="kicker k">5 · 매장 컨셉</div>
+        <div class="big h"><em>둔촌 아침빵 구독</em> 베이커리</div>
+        <div class="one">매일 아침 7시, 갓 구운 식사빵을, 줄 서지 않고, 동네 가격에</div>
+        <div class="three">
+          <div class="c copy"><h4>따라 할 것</h4><ul><li>대표 빵 1개 <span>(주말 한정)</span></li><li>동네 앵커 빵집 <span>(성심당식)</span></li></ul></div>
+          <div class="c fix"><h4>고칠 것</h4><ul><li>비싼 값 → 데일리 저가</li><li>줄 서기 → 예약 픽업</li><li>오후 품절 → 하루 2번 굽기</li></ul></div>
+          <div class="c new"><h4>새로 할 것</h4><ul><li>식빵 구독 <span>(주 3회)</span></li><li>아침 7시 오픈</li><li>입주민 커뮤니티 홍보</li></ul></div>
+        </div>
+        <div class="tag">[N15] 베이글 +44%, 소금빵 +30% · [N16] 런던베이글 이익률 30.5% · [F15] 대기업 출점 5%·400m 제한</div>
+      </section>
+
+      <!-- S7 -->
+      <section class="scene" id="s7">
+        <div class="kicker k">6 · 리스크 한 가지</div>
+        <div class="big h">단지 상가는 고정비가 무겁다</div>
+        <div class="risk">
+          <div class="box bad"><b>위험</b><br>1층 8.6평이면 월세만 월 약 516~602만 원.<br>"음식점은 인건비로 버티기 힘들다"</div>
+          <div class="box"><b>대응</b><br>8~10평 테이크아웃 · 2층/이면 검토<br>빈 가게 많을 때 월세 협상 · 구독으로 매출 미리 확보</div>
+        </div>
+        <div class="end">사람이 늘고 월세가 쉬는 곳에, 매일 빵을</div>
+        <div class="tag">[N2] 평당 60~70만 원 × 8.6평 (계산) · 근거 전체: 리서치 v2 부록 A</div>
+      </section>
+
+      <div id="prog"></div>
+    </div>
+  </div>
+
+  <div class="ctrl">
+    <button id="play" type="button">재생</button>
+    <button id="restart" class="ghost" type="button">처음부터</button>
+    <span class="time" id="time">0.0 / 30.0초</span>
+  </div>
+  <div class="rail" id="rail" aria-label="장면 이동"></div>
+
+  <div class="src">
+    <p>모든 숫자는 기사·보고서가 인용한 공공·민간 데이터입니다. 원데이터(서울 열린데이터광장)로 같은 기간 재확인이 필요합니다. 추론과 가설은 화면에 표시했습니다.</p>
+    <p>주요 출처: <a href="https://www.ajunews.com/view/20260515144613338">아주경제 2026.05 (서울시 상권분석서비스 분석)</a> · <a href="https://www.heraldk.com/article/2025082917000007188">헤럴드경제 2025.08 올림픽파크포레온 상가 르포</a> · <a href="https://kbthink.com/realestate/basics/blog/260225.html">KB Think 2026.02 이문 입주</a> · <a href="https://kbthink.com/main/asset-management/for-manager/dicon_ceo_content/ceo_content_business_zone_analysis/2024/business-zone-202405.html">KB Think 2024.05 신당</a> · <a href="https://tnnews.co.kr/archives/250211">테넌트뉴스 2025.10 용리단길</a> · <a href="https://www.mt.co.kr/estate/2026/06/20/2026061714273291589">머니투데이 2026.06 성수</a> · <a href="https://www.koreajoongangdaily.com/business/breadflation-impacts-korea-as-bagel-prices-rise-44-percent-in-three-years/12458344">Korea JoongAng Daily 2025.10 빵값</a> · <a href="https://www.fnnews.com/news/202408061834489459">파이낸셜뉴스 2024.08 상생협약</a></p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  var frame = document.getElementById('frame');
+  function fit() { stage.style.transform = 'scale(' + (frame.clientWidth / 1920) + ')'; }
+  fit();
+  window.addEventListener('resize', fit);
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(frame);
+
+  if (!window.gsap) { return; }
+  var $ = function (s) { return document.querySelectorAll(s); };
+  var chapters = [
+    { id: '#s1', t: 0, name: '제목' },
+    { id: '#s2', t: 3.5, name: '뜬다의 정의' },
+    { id: '#s3', t: 8, name: '두 종류' },
+    { id: '#s4', t: 12.5, name: '8곳→3곳' },
+    { id: '#s5', t: 17, name: '1순위 둔촌' },
+    { id: '#s6', t: 22, name: '매장 컨셉' },
+    { id: '#s7', t: 26.5, name: '리스크' }
+  ];
+  document.getElementById('s1').classList.remove('rest');
+  gsap.set('.scene', { opacity: 0 });
+
+  var tl = gsap.timeline({ paused: true });
+  function enter(sel, at) { tl.to(sel, { opacity: 1, duration: 0.45, ease: 'power2.out' }, at); }
+  function leave(sel, at) { tl.to(sel, { opacity: 0, duration: 0.4, ease: 'power2.in' }, at); }
+
+  // S1 0-3.5
+  enter('#s1', 0);
+  tl.from('#s1 .k', { y: 30, opacity: 0, duration: 0.6 }, 0.1)
+    .from('#s1 .t', { y: 70, opacity: 0, duration: 0.9, ease: 'back.out(1.4)' }, 0.25)
+    .from('#s1 .sub', { opacity: 0, duration: 0.6 }, 1.0)
+    .from('#s1 .sun', { scale: 0.4, opacity: 0, duration: 2.6, ease: 'power2.out' }, 0);
+  leave('#s1', 3.1);
+
+  // S2 3.5-8
+  enter('#s2', 3.5);
+  tl.from('#s2 .h', { x: -60, opacity: 0, duration: 0.6 }, 3.6)
+    .from('#s2 .bar', { scaleY: 0, duration: 0.7, stagger: 0.35, ease: 'power3.out' }, 4.0)
+    .from('#s2 .lab', { opacity: 0, y: 20, duration: 0.4, stagger: 0.35 }, 4.1)
+    .from('#s2 .cap', { opacity: 0, y: 30, duration: 0.6 }, 5.9)
+    .from('#s2 .tag', { opacity: 0, duration: 0.4 }, 6.2);
+  leave('#s2', 7.6);
+
+  // S3 8-12.5
+  enter('#s3', 8);
+  tl.from('#s3 .h', { x: -60, opacity: 0, duration: 0.6 }, 8.1)
+    .from('#s3 .visit', { x: -120, opacity: 0, duration: 0.7, ease: 'power3.out' }, 8.5)
+    .from('#s3 .live', { x: 120, opacity: 0, duration: 0.7, ease: 'power3.out' }, 9.2)
+    .from('#s3 .cap', { opacity: 0, y: 30, duration: 0.5 }, 10.3)
+    .from('#s3 .tag', { opacity: 0, duration: 0.4 }, 10.6);
+  leave('#s3', 12.1);
+
+  // S4 12.5-17
+  enter('#s4', 12.5);
+  tl.from('#s4 .h', { x: -60, opacity: 0, duration: 0.6 }, 12.6)
+    .from('#s4 .cand', { opacity: 0, x: -40, duration: 0.3, stagger: 0.12 }, 12.9)
+    .to('#s4 .c-drop', { opacity: 0.28, duration: 0.5, stagger: 0.06 }, 14.0)
+    .from('#s4 .pick', { opacity: 0, x: 80, duration: 0.55, stagger: 0.3, ease: 'power3.out' }, 14.4)
+    .from('#s4 .tag', { opacity: 0, duration: 0.4 }, 15.4);
+  leave('#s4', 16.6);
+
+  // S5 17-22
+  enter('#s5', 17);
+  tl.from('#s5 .h', { x: -60, opacity: 0, duration: 0.6 }, 17.1)
+    .from('#f-people', { scaleX: 0, duration: 1.0, ease: 'power3.out' }, 17.6)
+    .from('#v-people', { opacity: 0, duration: 0.4 }, 18.4)
+    .from('#f-spend', { scaleX: 0, duration: 0.8, ease: 'power3.out' }, 18.3)
+    .from('#v-spend', { opacity: 0, duration: 0.4 }, 18.9)
+    .from('#gapnote', { opacity: 0, y: 20, duration: 0.5 }, 19.3)
+    .from('#s5 .rent .box', { opacity: 0, y: 40, duration: 0.5, stagger: 0.3 }, 19.0)
+    .from('#s5 .tag', { opacity: 0, duration: 0.4 }, 20.2);
+  var hh = { v: 0 };
+  tl.to(hh, { v: 12000, duration: 1.0, ease: 'power1.out', onUpdate: function () { document.getElementById('hh').textContent = Math.round(hh.v).toLocaleString('ko-KR'); } }, 19.3);
+  leave('#s5', 21.6);
+
+  // S6 22-26.5
+  enter('#s6', 22);
+  tl.from('#s6 .h', { y: 50, opacity: 0, duration: 0.7, ease: 'back.out(1.3)' }, 22.1)
+    .from('#s6 .one', { opacity: 0, duration: 0.5 }, 22.7)
+    .from('#s6 .three .c', { opacity: 0, y: 60, duration: 0.55, stagger: 0.35, ease: 'power3.out' }, 23.1)
+    .from('#s6 .tag', { opacity: 0, duration: 0.4 }, 24.4);
+  leave('#s6', 26.1);
+
+  // S7 26.5-30
+  enter('#s7', 26.5);
+  tl.from('#s7 .h', { x: -60, opacity: 0, duration: 0.5 }, 26.6)
+    .from('#s7 .risk .box', { opacity: 0, y: 40, duration: 0.5, stagger: 0.3 }, 26.9)
+    .from('#s7 .end', { opacity: 0, y: 30, duration: 0.6 }, 28.0)
+    .from('#s7 .tag', { opacity: 0, duration: 0.4 }, 28.3);
+  tl.set({}, {}, 30);
+  tl.fromTo('#prog', { scaleX: 0 }, { scaleX: 1, duration: 30, ease: 'none' }, 0);
+
+  // UI
+  var playBtn = document.getElementById('play');
+  var timeEl = document.getElementById('time');
+  var rail = document.getElementById('rail');
+  chapters.forEach(function (c, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.id = 'ch' + i; b.textContent = c.name;
+    b.addEventListener('click', function () { tl.seek(c.t + (i === 0 ? 1.6 : 2.4)); tl.play(); });
+    rail.appendChild(b);
+  });
+  function sync() {
+    var t = tl.time();
+    timeEl.textContent = t.toFixed(1) + ' / 30.0초';
+    playBtn.textContent = tl.isActive() ? '일시정지' : (t >= 29.9 ? '다시 재생' : '재생');
+    var cur = 0;
+    chapters.forEach(function (c, i) { if (t >= c.t) cur = i; });
+    rail.querySelectorAll('button').forEach(function (b, i) { b.classList.toggle('on', i === cur); });
+  }
+  tl.eventCallback('onUpdate', sync);
+  tl.eventCallback('onComplete', sync);
+  playBtn.addEventListener('click', function () {
+    if (tl.isActive()) tl.pause();
+    else { if (tl.time() >= 29.9) tl.seek(0); tl.play(); }
+    sync();
+  });
+  document.getElementById('restart').addEventListener('click', function () { tl.seek(0).play(); sync(); });
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) { tl.seek(29.9); tl.pause(); } else { tl.seek(1.6); tl.pause(); setTimeout(function () { tl.seek(0); tl.play(); }, 300); }
+  sync();
+})();
+</script>

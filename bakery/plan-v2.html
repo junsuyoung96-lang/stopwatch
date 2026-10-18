@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>������ ��������� ������������ ���������������</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<style>
+body{max-width:1100px;margin:0 auto;padding:24px 16px 60px;font-family:"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;line-height:1.65;color:#2a211b;background:#fbf8f3}
+h1,h2,h3{color:#3a2a1c;line-height:1.3}h2{border-bottom:3px solid #f2b53a;padding-bottom:6px;margin-top:2.2em}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:12px 0;display:block;overflow-x:auto}
+th,td{border:1px solid #e3d8c8;padding:6px 8px;vertical-align:top}th{background:#f3ead9}
+blockquote{border-left:4px solid #f2b53a;margin:12px 0;padding:6px 14px;background:#fff6e3}
+code{background:#f1ebe2;padding:1px 4px;border-radius:3px}a{color:#9a5b12}
+.hero{background:#1f1712;color:#f3ece2;padding:18px 22px;border-radius:10px;margin-bottom:20px}.hero a{color:#f2b53a}
+</style>
+<div class="hero"><b>30초 모션 요약</b>: 같은 폴더의 <code>bakery-motion-30s.html</code> / <code>bakery-motion-30s.mp4</code> · 1순위는 둔촌(추천) 기준이며 신당 기준으로 바꿀 수 있습니다.</div>
+<header id="title-block-header">
+<h1 class="title">������ ��������� ������������ ���������������</h1>
+</header>
+<h1 id="서울-베이커리-창업-상권-3곳-추천--1순위-매장-컨셉-v2">서울
+베이커리 창업: 상권 3곳 추천 &amp; 1순위 매장 컨셉 (v2)</h1>
+<ul>
+<li>작성일: 2026-10-18 · 작성 관점: 서울에서 첫 빵집을 여는 예비
+창업주</li>
+<li>v1(프레임)과의 관계: v1의 틀(정의 → 지표 → 깔때기 → 컨셉)에
+<strong>실제 숫자</strong>를 넣고, 상권 3곳과 1순위 컨셉을 정한
+버전</li>
+<li>표기: 확인한 사실은 <code>[N번호]</code>(이번 v2 신규) 또는
+<code>[F번호]</code>(v1 팩트북)로 표시. 출처 링크와 원문 문장은
+<strong>부록 A</strong></li>
+<li>정직성 규칙: 확인 못 한 숫자는 <strong>모름</strong>. 추론은
+<strong>(추론)</strong>, 가설은 **(가설)**로 표시</li>
+<li>함께 보는 파일: 30초 모션 요약 <code>bakery-motion-30s.html</code>
+(같은 폴더)</li>
+</ul>
+<blockquote>
+<p>⚠️ 이번 조사 환경에서는 서울 열린데이터광장·상권분석서비스·네이버
+데이터랩 <strong>원데이터에 직접 접속이 막혀</strong> 있었다. 그래서
+숫자는 그 데이터를 인용한 <strong>기사·보고서</strong>에서 가져왔다.
+상권마다 기간과 출처가 달라 1:1 비교에 한계가 있고, 이 점을 표마다 적어
+두었다.</p>
+</blockquote>
+<hr />
+<h2 id="0-한-장-요약-executive-summary">0. 한 장 요약 (Executive
+Summary)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>질문</th>
+<th>답</th>
+<th>핵심 근거</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"뜬다"란?</td>
+<td>사람·소비는 늘고, 임대료(가게 월세)는 아직 덜 오른 곳</td>
+<td>핫플 외 서울 상가 임대료는 하락, 핫플만 상승 [F14]</td>
+</tr>
+<tr class="even">
+<td>어떤 "뜨는 곳"을 볼까?</td>
+<td>**놀러 오는 곳(방문형)**과 <strong>살러 오는 곳(거주형)</strong> 두
+종류로 나눠 본다. 빵은 매일 사는 물건이라 거주형이 유리 (가설)</td>
+<td>방문형 대표 성수·용산은 임대료가 이미 2~4배 [N7][N8]</td>
+</tr>
+<tr class="odd">
+<td>추천 3곳</td>
+<td><strong>1순위 강동구 둔촌동</strong>, <strong>2순위 동대문구
+이문동</strong>, <strong>3순위 중구 신당동</strong></td>
+<td>아래 1-2</td>
+</tr>
+<tr class="even">
+<td>1순위 이유</td>
+<td>사람 +45.5%로 후보 중 최고, 그런데 1층 임대료는 오히려
+<strong>내려가는 중</strong></td>
+<td>[N1][N2]</td>
+</tr>
+<tr class="odd">
+<td>1순위 컨셉</td>
+<td><strong>"둔촌 아침빵 구독 베이커리"</strong>: 아침 7시 식사빵 + 주말
+시그니처 1개 + 예약 픽업·구독</td>
+<td>1만 2천 가구 [N2], 빵값 부담 [N15], 대기업 출점 제한 [F15]</td>
+</tr>
+<tr class="even">
+<td>가장 큰 위험 1개</td>
+<td>단지 상가의 높은 고정비(월세+인건비)</td>
+<td>1층 평당 월 60~70만 원, "음식점은 인건비로 버티기 힘들다" [N2]</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-where-to-play">1. Where to play</h2>
+<h3 id="1-0-뜬다의-정의-구조화">1-0. "뜬다"의 정의 (구조화)</h3>
+<p><strong>[뜬다의 정의] 뜬다는 "사람이 늘고 → 돈을 더 쓰고 → 월세가
+따라 오르는" 흐름에서, 앞의 두 개는 오르는데 월세는 아직 덜 오른
+상태다.</strong></p>
+<ul>
+<li>관심(검색·SNS) → 방문(유동인구·지하철) → 소비(카드 결제) → 임대료
+순서로 움직인다고 본다 (가설: 상권마다 시차는 원데이터로 확인
+필요).</li>
+<li>2025년 서울 상가는 "핫플레이스" 상권만 임대료가 오르고 나머지는
+떨어졌다 [F14]. 그래서 임대료는 "이미 뜬 결과"를 보여 주는 늦은
+숫자(후행 지표)다.</li>
+</ul>
+<p><strong>[두 종류의 뜨는 곳] 뜨는 곳은 "놀러 오는 곳(방문형)"과 "살러
+오는 곳(거주형)"으로 나뉜다.</strong></p>
+<ul>
+<li>방문형: 성수·용리단길처럼 바이럴(입소문)로 손님이 몰리는 곳. 매출이
+크게 뛰지만 월세도 빨리 오른다. 용리단길은 임대료·권리금(가게 자리값)이
+3년 새 3~4배 [N7], 성수 연무장길은 2023년 대비 임대료 2~3배, 권리금은
+2021년 대비 15~20배 [N8].</li>
+<li>거주형: 큰 아파트 단지가 새로 들어와 "매일 오는 사람"이 늘어나는 곳.
+서울시 상권분석서비스 분석에서 재건축 지역 둔촌동은 사람(길상주인구)이
+5년 새 45.5% 늘었다 [N1].</li>
+<li>빵은 "매일 사는 물건"이라 거주형이 매출이 꾸준할 가능성이 높다
+(가설). 반대로 브랜드를 크게 키우고 싶다면 방문형이 맞다. 그래서 3곳은
+<strong>거주형 2곳 + 방문형 1곳</strong>으로 섞었다.</li>
+</ul>
+<p><strong>[과열 경고] 월세가 사람·소비보다 빨리 오르면 "너무 뜨거운
+곳"이다.</strong></p>
+<ul>
+<li>용리단길: 작은 매장도 월세 700~800만 원이라는 불만이 나온다
+[N7].</li>
+<li>가로수길: 한때 핫플이었지만 공실률(빈 가게 비율) 45.2%까지 올랐다
+[N10]. 뜬 뒤 식는 사례다.</li>
+</ul>
+<h3 id="1-1-검증-포인트-ah-데이터를-실제로-얼마나-구했나">1-1. 검증
+포인트 a~h: 데이터를 실제로 얼마나 구했나</h3>
+<table>
+<thead>
+<tr class="header">
+<th>코드</th>
+<th>지표 (쉬운 말)</th>
+<th>이번에 구한 것</th>
+<th>구하지 못한 것 (모름)</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>a</td>
+<td>유동인구 추이 (길에 다니는 사람 수)</td>
+<td>둔촌 +45.5%, 이문 +39.4%, 잠원 +9.9%, 길동 +8.0% (2020년
+4분기→2025년 4분기, "길상주인구") / 신당 중앙시장 하루 평균 21,955명
+(시점 불명)</td>
+<td>신당·용산·성수의 같은 기간 증가율</td>
+<td>[N1][N4]</td>
+</tr>
+<tr class="even">
+<td>b</td>
+<td>인스타·틱톡 바이럴 언급 추이</td>
+<td>정성 신호만: 2026년 7월 서울역사박물관 신당동 조사보고서 발간,
+언론의 "힙당동" 보도 [N22]</td>
+<td><strong>상권별 SNS 게시물 수 3년 추이는 모름.</strong> 인스타 API는
+7일에 해시태그 30개까지만, 틱톡 연구 API는 한국 개인 대상 아님
+[F11][F12]. 네이버 데이터랩은 이번 환경에서 접속 차단</td>
+<td>[N22][F11][F12]</td>
+</tr>
+<tr class="odd">
+<td>c</td>
+<td>상권 가격(임대료) 추이</td>
+<td>둔촌 1층 평당 월 90~100만 → 60~70만 원 (하락) / 신당 3.3㎡당
+16.6만(2019) → 22.8만(2022) / 성수 2023 대비 2~3배 / 용리단길 3년 새
+3~4배 / 임대가격지수 뚝섬 +29.2%, 용산역 +25.17% (2023년 1분기~2025년
+4분기)</td>
+<td>이문동 임대료</td>
+<td>[N2][N5][N8][N7][N9]</td>
+</tr>
+<tr class="even">
+<td>d</td>
+<td>인근 지하철 승하차 추이</td>
+<td>2026년 상반기 주말 승하차(평일 대비): 올림픽공원역 +13.5%, 동묘앞역
++46.3%</td>
+<td>후보 역별 3년 추이 (열린데이터광장 원데이터 접속 차단)</td>
+<td>[N13][F7]</td>
+</tr>
+<tr class="odd">
+<td>e</td>
+<td>차량 유입 추이</td>
+<td>—</td>
+<td><strong>모름.</strong> 대체식(주차장 수 × 면수 × 수용률)도
+민영주차장 수용률이 공개되지 않아 계산 불가 [F9]</td>
+<td>[F9]</td>
+</tr>
+<tr class="even">
+<td>f</td>
+<td>인근 매장 결제 건수·금액 추이</td>
+<td>둔촌 +18.6%, 이문 +26.8%, 잠원 +34.3%, 길동 +33.6% (5년) / 신당
+중앙시장 +117% (2019→2023) / 광희동 +33% (2022→2024) / 청량리역 +228%
+(기간 표기 불명확) / 용리단길 +343%, 신용산 일대 +128% (기간 표기
+불명확)</td>
+<td>상권별 <strong>제과점 업종만</strong> 떼어 낸 매출</td>
+<td>[N1][N4][N6][N12][N7]</td>
+</tr>
+<tr class="odd">
+<td>g</td>
+<td>카드 결제 건수·금액 추이</td>
+<td>f와 같은 데이터(카드사 결제 기반 추정매출) [F2]. 외국인 결제: 광희동
+149억 → 976억 원 (6.5배)</td>
+<td>결제 <strong>건수</strong> 추이</td>
+<td>[F2][N6]</td>
+</tr>
+<tr class="even">
+<td>h</td>
+<td>휴대폰 단말기 수, 통화·문자량 추이</td>
+<td>서울 생활인구(=a의 바탕)는 KT 통신 신호로 추정한 값이라 "단말기
+수"를 이미 간접 반영 [F1]</td>
+<td><strong>통화·문자량 상권별 추이는 공개 데이터 없음 →
+모름</strong></td>
+<td>[F1]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>[데이터 결론] 8개 지표 중 숫자로 비교 가능한 것은 a(사람),
+c(임대료), f·g(결제) 3묶음이다.</strong></p>
+<ul>
+<li>b·d·e·h는 "없음" 또는 "일부"라서 점수에서 빼고 정성 근거로만
+썼다.</li>
+<li>사업계획서 최종본 전에 열린데이터광장 원데이터(OA-15572 추정매출,
+OA-12252 지하철)로 같은 기간·같은 기준 숫자를 다시 뽑아야 한다.</li>
+</ul>
+<h3 id="1-2-상권-8곳--3곳-깔때기">1-2. 상권 8곳 → 3곳 (깔때기)</h3>
+<p><strong>[후보 고르기] 숫자가 공개된 서울 상권 8곳을 같은 표에 놓고,
+사람·소비·임대료·앞으로 3년의 확정 수요로 걸렀다.</strong></p>
+<ul>
+<li>신호 표시: ▲▲ 강함 / ▲ 보통 / ▽ 약함 / ? 모름. 임대료는 "덜
+올랐을수록" 좋은 점수(진입에 유리).</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>후보</th>
+<th>유형</th>
+<th>사람 (a)</th>
+<th>소비 (f·g)</th>
+<th>임대료 (c)</th>
+<th>앞으로 3년 확정 수요</th>
+<th>빵집 궁합</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>둔촌동</strong> (강동)</td>
+<td>거주형</td>
+<td>▲▲ +45.5%</td>
+<td>▲ +18.6% (사람보다 느림 = 아직 채워질 빈칸)</td>
+<td>▲▲ 1층 임대료 <strong>하락</strong>, 1층 공실 30% 이상</td>
+<td>▲▲ 약 1만 2천 가구 입주 (2024.11~)</td>
+<td>▲▲ 매일 빵</td>
+<td><strong>1순위</strong></td>
+</tr>
+<tr class="even">
+<td><strong>이문동</strong> (동대문)</td>
+<td>거주형</td>
+<td>▲▲ +39.4%</td>
+<td>▲ +26.8%</td>
+<td>? 모름</td>
+<td>▲▲ 4,321세대(2025) + 3,069세대(2026 예정)</td>
+<td>▲▲ 주거 + 대학가</td>
+<td><strong>2순위</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>신당동</strong> (중구)</td>
+<td>방문형+주거</td>
+<td>? (일평균 21,955명, 추이 모름)</td>
+<td>▲▲ +117% (2019→2023)</td>
+<td>▲ 3.3㎡당 22.8만 원(2022), 성수 2023년 29만 원보다 낮음</td>
+<td>▲ 신중앙시장 아케이드 사업 (2차 출처)</td>
+<td>▲ 방문·브랜드형</td>
+<td><strong>3순위</strong></td>
+</tr>
+<tr class="even">
+<td>광희동 (중구)</td>
+<td>방문형</td>
+<td>?</td>
+<td>▲▲ +33% (2022→2024), 외국인 6.5배</td>
+<td>?</td>
+<td>▲ 2026~27 로컬브랜드 상권 예정 (2차 출처)</td>
+<td>▽ 외국인 의존</td>
+<td>신당과 붙은 보조 근거</td>
+</tr>
+<tr class="odd">
+<td>청량리역 (동대문)</td>
+<td>방문+주거</td>
+<td>?</td>
+<td>▲▲ +228% (기간 불명확)</td>
+<td>?</td>
+<td>?</td>
+<td>▲ 60대 이상 소비 34.1%</td>
+<td>보류 (기간 확인 필요)</td>
+</tr>
+<tr class="even">
+<td>잠원동 (서초)</td>
+<td>거주형</td>
+<td>▽ +9.9%</td>
+<td>▲▲ +34.3%</td>
+<td>? (고가 지역 추정)</td>
+<td>?</td>
+<td>▲</td>
+<td>보류 (이미 성숙)</td>
+</tr>
+<tr class="odd">
+<td>신용산·용리단길</td>
+<td>방문형</td>
+<td>?</td>
+<td>▲▲ +128~343%</td>
+<td>▽▽ 3년 새 3~4배</td>
+<td>▲ 용산국제업무지구 (기반시설 2028)</td>
+<td>▽ 월세 부담</td>
+<td><strong>비교 기준 (이미 뜬 곳)</strong></td>
+</tr>
+<tr class="even">
+<td>성수 연무장길</td>
+<td>방문형</td>
+<td>▲▲ 외국인 +110%</td>
+<td>▲ 2026년 3월 +11%</td>
+<td>▽▽ 2~3배, 권리금 15~20배, 공실 2.5%</td>
+<td>—</td>
+<td>▽ 월세 부담</td>
+<td><strong>비교 기준 (이미 뜬 곳)</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>근거: 둔촌·이문·잠원·청량리 [N1][N12], 둔촌 임대료·가구 [N2], 이문
+세대 [N3], 신당 [N4][N5], 광희 [N6][N23], 용산 [N7][N9][N20], 성수
+[N8][N10][N11][N21]</li>
+<li>⚠️ 둔촌·이문·잠원·길동은 같은 출처·같은 기간(상권분석서비스, 2020년
+4분기→2025년 4분기)이라 서로 비교할 수 있다. 신당·광희·용산·성수는 다른
+출처·다른 기간이라 <strong>방향만 비교</strong>했다.</li>
+</ul>
+<p><strong>[1순위 둔촌동] 사람은 가장 빨리 늘었는데 월세는 내려가는,
+"뜬다" 정의에 가장 잘 맞는 곳이다.</strong></p>
+<ul>
+<li>사람(길상주인구) 544만 → 792만 명, +45.5% (2020년 4분기 → 2025년
+4분기). 비교 가능한 후보 중 1위 [N1].</li>
+<li>소비는 852억 → 1,010억 원, +18.6% [N1]. 사람이 늘어난 속도의 절반도
+안 된다. 새로 이사 온 사람들이 아직 동네 안에서 돈을 다 쓰지 않는다는
+뜻이고, 앞으로 3년 동안 채워질 빈칸이다 (추론).</li>
+<li>1층 대로변 월세는 입주 초기 평당 90~100만 원에서 60~70만 원으로
+내려갔고, 1층 공실이 30% 이상이다 [N2]. 가게 주인과 월세를 협상하기 좋은
+때다.</li>
+<li>주말에는 올림픽공원 쪽 사람이 는다. 2026년 상반기 올림픽공원역 주말
+승하차는 평일보다 13.5% 많았다 [N13]. 주말 시그니처 빵을 팔 근거다.</li>
+</ul>
+<p><strong>[2순위 이문동] 입주가 지금 진행 중이라, 3년 안에 사람이 가장
+확실하게 늘어날 곳이다.</strong></p>
+<ul>
+<li>사람 +39.4%, 소비 +26.8% (같은 5년) [N1].</li>
+<li>이문아이파크자이 4,321세대(2025년 입주 예정), 래미안라그란데
+3,069세대(2026년 입주 예정) [N3]. 합치면 약 7,400세대가 3년 창 안에
+들어온다.</li>
+<li>약점: 임대료 데이터가 없다 (모름). 계약 전 현장 확인 필수.</li>
+</ul>
+<p><strong>[3순위 신당동] 거주형이 아닌 "방문형" 옵션. 임대료가 아직
+성수의 3분의 2~4분의 3 수준이라 브랜드형 매장을 시험하기
+좋다.</strong></p>
+<ul>
+<li>서울중앙시장 매출 2019 → 2023년 +117%, 방문객 48%가 MZ세대(2024년
+3월) [N4].</li>
+<li>임대료 3.3㎡당 16.6만(2019) → 22.8만 원(2022), +37% [N5]. 같은 글이
+인용한 성수 2023년 29만 원보다 낮다 [N5].</li>
+<li>바로 옆 광희동은 카드 매출 +33%(2022→2024), 외국인 지출 6.5배
+[N6].</li>
+<li>약점: 숫자가 2022~2023년 기준이라 오래됐고, "이미 뜨기 시작"해
+임대료가 계속 오르는 중이다 (추론).</li>
+</ul>
+<p><strong>[민감도: 목표가 바뀌면 1순위도 바뀐다]</strong></p>
+<ul>
+<li>"안정적으로 매일 팔기"가 목표 → 둔촌 1순위 (이 문서의 선택. 첫
+창업이라 망하지 않는 것이 먼저라고 봄)</li>
+<li>"브랜드를 빨리 알리기"가 목표 → 신당 1순위</li>
+<li>이 선택은 사용자(창업주)가 정할 일이다.</li>
+</ul>
+<p><strong>[멀티 페르소나 검증: 정성] 숫자로 고른 1순위를 4명의 눈으로
+다시 본다.</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>페르소나</th>
+<th>질문</th>
+<th>이번에 확인한 것</th>
+<th>아직 현장에서 볼 것</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>① 동네 주민 (30~40대 가족)</td>
+<td>매일 살 빵집이 가까이 있나?</td>
+<td>약 1만 2천 가구가 입주했고 상가 1층은 30% 이상 비어 있다 [N2] →
+빵집이 이미 꽉 찬 상태는 아닐 가능성 (추론)</td>
+<td>단지 안·주변 빵집 수 (소진공 상가정보 [F18]로 세기)</td>
+</tr>
+<tr class="even">
+<td>② 출근하는 직장인</td>
+<td>아침 7~8시에 빵을 살 곳이 있나?</td>
+<td>5호선·9호선 역세권 (일반 정보)</td>
+<td>오전 7~9시 승하차 (열린데이터광장 [F7])</td>
+</tr>
+<tr class="odd">
+<td>③ 주말 방문객</td>
+<td>올림픽공원 가는 길에 들를 이유가 있나?</td>
+<td>올림픽공원역 주말 승하차 평일 대비 +13.5% [N13]</td>
+<td>주말 공원 동선 관찰</td>
+</tr>
+<tr class="even">
+<td>④ 상가 주인·중개인</td>
+<td>월세 협상 여지가 있나?</td>
+<td>1층 월세 하락, "분양가 대비 25% 이상 할인해야 거래" [N2]</td>
+<td>이면·2층 월세, 렌트프리(무상 임대 기간) 가능 여부</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-how-to-play-1순위-둔촌동-한정">2. How to play (1순위 둔촌동
+한정)</h2>
+<h3 id="2-1-시장-구조-프랜차이즈-vs-개인-빵집">2-1. 시장 구조:
+프랜차이즈 vs 개인 빵집</h3>
+<p><strong>[규제가 만든 빈자리] 대기업 빵집은 새 매장을 마음대로 못
+낸다. 새로 생긴 큰 단지는 개인 빵집에게 기회다.</strong></p>
+<ul>
+<li>대기업 프랜차이즈 제과점은 2024년부터 5년간 신규 출점이 기존 점포
+수의 5% 이내, 수도권은 중소 제과점과 400m 거리 [F15].</li>
+<li>파리바게뜨 국내 약 3,400개, 뚜레쥬르 약 1,200~1,400개 [N18]. 이미 큰
+2개사가 매년 늘릴 수 있는 수가 정해져 있다.</li>
+<li>그래서 1만 2천 가구 새 단지에 대기업 빵집이 빠르게 여러 개
+들어오기는 어렵다 (추론).</li>
+</ul>
+<p><strong>[들고 나는 시장] 빵집은 많이 닫는다. 그래서 "버티는 구조"가
+먼저다.</strong></p>
+<ul>
+<li>전국 제과점 폐업: 2,101곳(2020) → 3,591곳(2024), 폐업률 11.1% →
+18.5% [N14]. 2023·2024년엔 전체 수가 순감 [N14].</li>
+<li>반면 국세청 사업자 수 기준 제과점은 2026년 2월 전년 대비 +3.9%
+[F17]. 기준(인허가 vs 사업자등록)이 달라 숫자가 엇갈린다. 결론: "많이
+열고 많이 닫는다".</li>
+<li>빵값은 계속 오른다: 빵 물가 2022년 6월 대비 +19.4%, 소금빵
+3,300~3,700원(+30%), 베이글 4,400~4,900원(+44%) [N15].</li>
+</ul>
+<h3 id="2-2-컨셉-유형화--유형별-리딩-업체">2-2. 컨셉 유형화 + 유형별
+리딩 업체</h3>
+<table>
+<thead>
+<tr class="header">
+<th>유형</th>
+<th>쉬운 설명</th>
+<th>리딩 업체 (확인된 것만)</th>
+<th>리딩 업체 숫자</th>
+<th>둔촌에서의 기회 (판단)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>① 대기업 프랜차이즈</td>
+<td>어디서나 같은 빵</td>
+<td>파리바게뜨, 뚜레쥬르</td>
+<td>약 3,400개 / 1,200~1,400개 [N18]</td>
+<td>▽ 출점 제한으로 느림 [F15]</td>
+</tr>
+<tr class="even">
+<td>② 동네 데일리 빵집</td>
+<td>매일 먹는 식빵·바게트</td>
+<td>성심당 (지역 대표 빵집)</td>
+<td>2025년 매출 2,629억 원, 2024년 빵류 제조업체 영업이익 1위 478억 원
+[N17]</td>
+<td>▲▲ <strong>우리가 갈 곳</strong></td>
+</tr>
+<tr class="odd">
+<td>③ 한 가지 빵 전문점</td>
+<td>베이글·소금빵 하나만</td>
+<td>런던베이글뮤지엄</td>
+<td>2023년 매출 796억 원, 영업이익률 30.5% [N16]</td>
+<td>▲ 주말 시그니처로만 차용</td>
+</tr>
+<tr class="even">
+<td>④ 대형 카페형</td>
+<td>넓은 공간 + 커피</td>
+<td>모름 (이번에 숫자 확보 못 함)</td>
+<td>모름</td>
+<td>▽ 월세·인건비 부담 큼</td>
+</tr>
+<tr class="odd">
+<td>⑤ 아티장·건강빵</td>
+<td>천연발효·통밀</td>
+<td>타르틴 베이커리 (2025년 한남 입점) [N10 원 보고서 p.28]</td>
+<td>매출 모름</td>
+<td>▲ 데일리 라인에 일부</td>
+</tr>
+<tr class="even">
+<td>⑥ 디저트·구움과자</td>
+<td>쿠키·휘낭시에</td>
+<td>특정 리딩 업체 모름. 2026년 라이징 키워드 "두바이쫀득쿠키",
+"피스타치오" [N19]</td>
+<td>모름</td>
+<td>▽ 유행 수명 짧음 (추론)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-3-가치사슬vc별-ksf-따라-할-것--고칠-것--새로-할-것">2-3.
+가치사슬(V/C)별 KSF: 따라 할 것 / 고칠 것 / 새로 할 것</h3>
+<blockquote>
+<p>V/C(가치사슬): 재료를 사서 빵을 만들어 손님 손에 줄 때까지의 순서.
+KSF(핵심 성공 요인): 이기려면 꼭 잘해야 하는 것.</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th>V/C 단계</th>
+<th>리딩 업체의 KSF</th>
+<th>근거</th>
+<th>우리 판단</th>
+<th>우리가 할 것</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. 메뉴</td>
+<td>대표 빵 1개가 손님을 끌고 온다 (런던베이글 = 베이글)</td>
+<td>매출 796억, 이익률 30.5% [N16]</td>
+<td><strong>따라 함</strong></td>
+<td>주말 시그니처 1개만 (평일은 식사빵)</td>
+</tr>
+<tr class="even">
+<td>2. 가격</td>
+<td>프리미엄 가격</td>
+<td>소금빵·베이글 2~3년 새 30~44% 상승 [N15]</td>
+<td><strong>고침</strong></td>
+<td>식빵·바게트 데일리 라인은 동네 평균보다 낮게, 구독 할인</td>
+</tr>
+<tr class="odd">
+<td>3. 생산</td>
+<td>프랜차이즈는 공장 반죽, 아티장은 매장 직접</td>
+<td>— (업계 일반)</td>
+<td><strong>고침</strong></td>
+<td>매장에서 하루 2번 굽기 (아침 7시, 오후 4시)</td>
+</tr>
+<tr class="even">
+<td>4. 공간</td>
+<td>런던베이글: 사진 찍고 싶은 공간</td>
+<td>줄 서는 매장 사진 [N16 관련 기사]</td>
+<td><strong>하지 않음</strong></td>
+<td>8~10평 테이크아웃. 큰 공간은 월세·인건비 위험 [N2]</td>
+</tr>
+<tr class="odd">
+<td>5. 알리기</td>
+<td>SNS 바이럴, 오픈런</td>
+<td>—</td>
+<td><strong>새로 함</strong></td>
+<td>단지 입주민 커뮤니티·당근 동네 소식 중심 (거주형 상권이라 SNS보다
+이웃 입소문) (가설)</td>
+</tr>
+<tr class="even">
+<td>6. 판매 채널</td>
+<td>런던베이글은 컬리 온라인 입점</td>
+<td>컬리 입점 기사 (검색 결과)</td>
+<td><strong>새로 함</strong></td>
+<td>전날 밤 예약 → 아침 픽업, 주 3회 식빵 구독</td>
+</tr>
+<tr class="odd">
+<td>7. 운영 (남는 빵)</td>
+<td>성심당: 지역 앵커로 규모의 경제</td>
+<td>[N17]</td>
+<td><strong>새로 함</strong></td>
+<td>구독 주문으로 굽는 양을 미리 알고, 저녁 마감 할인으로 폐기
+줄이기</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-4-새로운-수요-unmet-needs">2-4. 새로운 수요 (unmet needs)</h3>
+<p><strong>[빈칸 1: 아침] 새로 이사 온 1만 2천 가구가 아침에 살 갓 구운
+빵 (가설).</strong></p>
+<ul>
+<li>근거: 사람은 +45.5%인데 소비는 +18.6% [N1] → 동네 안 소비처가 아직
+부족할 가능성 (추론). 1층 공실 30% 이상 [N2].</li>
+<li>확인: 오전 7~9시 둔촌동역·둔촌오륜역 승하차, 단지 앞 빵집 영업 시작
+시간.</li>
+</ul>
+<p><strong>[빈칸 2: 가격 피로] 빵값이 너무 올랐다는 느낌.</strong></p>
+<ul>
+<li>근거: 빵 물가 +19.4% (2022.6 → 2025.8), 베이글 +44% [N15].</li>
+<li>기회: "매일 먹는 빵은 싸게, 주말 빵은 특별하게" 두 줄 가격.</li>
+</ul>
+<p><strong>[빈칸 3: 줄 서기 피로] 오픈런 없이 사고 싶은 사람
+(가설).</strong></p>
+<ul>
+<li>근거: 런던베이글이 컬리 입점을 "오픈런 없이 샛별배송으로"라고 홍보
+(검색 결과 제목). 수요가 있다는 간접 신호.</li>
+<li>기회: 예약 픽업. ※ 소비자 조사 숫자는 <strong>모름</strong>.</li>
+</ul>
+<h3 id="2-5-우리의-play-결론">2-5. 우리의 Play (결론)</h3>
+<p><strong>[컨셉 한 줄] "둔촌 아침빵 구독 베이커리": 매일 아침 7시 갓
+구운 식사빵을, 줄 서지 않고, 동네 가격에.</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>구분</th>
+<th>무엇</th>
+<th>근거</th>
+<th>필요한 우리 역량</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>따라 할 것</td>
+<td>대표 빵 1개 (주말 한정) / 지역 사람이 사랑하는 동네 앵커</td>
+<td>[N16][N17]</td>
+<td>시그니처 레시피 1개</td>
+</tr>
+<tr class="even">
+<td>고칠 것</td>
+<td>비싼 가격 → 데일리 라인 저가 / 줄 서기 → 예약 픽업 / 오후 품절 →
+하루 2번 굽기</td>
+<td>[N15]</td>
+<td>원가 관리, 2회 생산 동선</td>
+</tr>
+<tr class="odd">
+<td>새로 할 것</td>
+<td>식빵 구독(주 3회), 아침 7시 오픈, 입주민 커뮤니티 마케팅</td>
+<td>[N1][N2]</td>
+<td>예약·구독 운영 (스마트스토어·카카오 채널 등 기존 도구)</td>
+</tr>
+<tr class="even">
+<td>하지 않을 것</td>
+<td>대형 카페형 공간, 프랜차이즈와 할인 경쟁, 짧은 디저트 유행 쫓기</td>
+<td>[N2][N19]</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-6-유형별-경쟁-강도">2-6. 유형별 경쟁 강도</h3>
+<table>
+<thead>
+<tr class="header">
+<th>지표</th>
+<th>전국/서울 숫자</th>
+<th>둔촌 숫자</th>
+<th>해석</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td># players 추이</td>
+<td>전국 제과점 2023년 -143곳, 2024년 -138곳 순감 [N14]; 사업자 수는
++3.9% (2026.2) [F17]</td>
+<td><strong>모름</strong> (소진공 상가정보로 세야 함 [F18])</td>
+<td>전체로는 "많이 열고 많이 닫는" 시장</td>
+</tr>
+<tr class="even">
+<td>M/S 쪼개짐 (%)</td>
+<td>프랜차이즈 2사 약 4,600~4,800개 [N18], 전체 제과점 수 대비 비중은
+<strong>모름</strong></td>
+<td><strong>모름</strong></td>
+<td>매장별 매출이 비공개라 점유율 계산 불가</td>
+</tr>
+<tr class="odd">
+<td>신규 진입</td>
+<td>대기업 5%·400m 제한 [F15]</td>
+<td>1층 공실 30% 이상 = 들어갈 자리 많음 [N2]</td>
+<td>①유형 진입은 느림, ②③유형 개인 빵집 진입 가능 (추론)</td>
+</tr>
+<tr class="even">
+<td>소상권 매출 추이</td>
+<td>—</td>
+<td>상권 전체 +18.6% (5년) [N1], 제과점만은 <strong>모름</strong></td>
+<td>상권 전체는 성장 중</td>
+</tr>
+<tr class="odd">
+<td>유형별 강도 (판단)</td>
+<td>① 낮음(규제) / ② 보통 / ③ 높음(유행 경쟁) / ④ 낮음(비용 장벽) / ⑤
+보통 / ⑥ 높음</td>
+<td>—</td>
+<td><strong>②데일리 + ③시그니처 1개 조합</strong>이 경쟁은 보통, 수요는
+확실 (추론)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-리스크-한-가지">3. 리스크 한 가지</h2>
+<p><strong>[고정비 위험] 단지 상가는 월세와 인건비가 커서, 음식점이
+버티기 힘들다는 현장 목소리가 있다.</strong></p>
+<ul>
+<li>1층 대로변 월세 평당 60~70만 원 [N2] → 8.6평이면 월 약 516~602만 원
+(계산: 8.6 × 60~70만).</li>
+<li>현장 중개인: 학원·미용실·부동산 외에는 입점이 어렵고, "음식점은
+인건비 부담으로 버티기 힘들다" [N2].</li>
+<li>자영업 비용 구조: 재료비 22.2%, 인건비 21.2%, 임차료 18.7%
+[N14].</li>
+<li><strong>대응</strong>: ① 8~10평 테이크아웃 + 1층 이면 또는 2층(2층
+분양가는 1층의 절반 [N2]) ② 1층 공실 30% 이상을 이용해 월세·렌트프리
+협상 ③ 구독으로 매출 일부를 미리 확보 ④ 아침·오후 피크에만
+파트타임.</li>
+</ul>
+<hr />
+<h2 id="4-레드-검증-루프-black--red13--blue--silver--gold">4. 레드 검증
+루프 (Black → Red1~3 / Blue / Silver / Gold)</h2>
+<blockquote>
+<p>⚠️ 같은 Claude가 역할을 나눠 매긴 <strong>자체 평가</strong>다. 외부
+전문가 검증이 아니다.</p>
+</blockquote>
+<h3 id="round-1-초안-방문형-3곳--성수-확장용산신당">Round 1 (초안:
+방문형 3곳 = 성수 확장·용산·신당)</h3>
+<table>
+<thead>
+<tr class="header">
+<th>역할</th>
+<th>점수</th>
+<th>지적</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Red1 컨설턴트 (설득)</td>
+<td>7.5</td>
+<td>성수·용산은 임대료가 이미 2~4배. "뜬다" 정의(임대료는 덜 오른 곳)와
+모순된다.</td>
+</tr>
+<tr class="even">
+<td>Red2 팩트 검증</td>
+<td>7.0</td>
+<td>상권마다 기간·출처가 다른데 한 줄 순위로 비교했다. 신당 숫자는
+2023년이라 오래됐다.</td>
+</tr>
+<tr class="odd">
+<td>Red3 논리 구조</td>
+<td>7.5</td>
+<td>b(바이럴)·d(지하철)·e(차량)·h(통신) 데이터를 못 구했는데 점수에
+넣었다.</td>
+</tr>
+<tr class="even">
+<td>Blue 옹호</td>
+<td>8.5</td>
+<td>실제 기사 숫자가 들어가 v1보다 구체적이다.</td>
+</tr>
+<tr class="odd">
+<td>Silver 전문가</td>
+<td>7.0</td>
+<td>빵은 매일 사는 물건. 놀러 오는 상권만 본 것은 빵집 특성과 맞지
+않는다.</td>
+</tr>
+<tr class="even">
+<td>Gold 파트너/독자</td>
+<td>7.5</td>
+<td>컨셉이 한 줄로 안 떨어진다.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Black 수정</strong>: 상권분석서비스 기반 재건축 지역
+데이터(둔촌·이문·잠원·길동, 같은 기간) 추가 → "거주형 vs 방문형" 구분
+도입, 성수·용산은 비교 기준으로 이동, 데이터 없는 지표는 점수에서
+제외하고 "모름" 명시.</p>
+<h3 id="round-2">Round 2</h3>
+<table>
+<thead>
+<tr class="header">
+<th>역할</th>
+<th>점수</th>
+<th>지적</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Red1</td>
+<td>9.0</td>
+<td>둔촌 논리는 좋다. 그런데 "왜 신당이 아니라 둔촌인가"는 창업 목표에
+달렸다 → 민감도 필요.</td>
+</tr>
+<tr class="even">
+<td>Red2</td>
+<td>9.0</td>
+<td>폐업 수가 v1(3,542, MTN)과 v2(3,591, 아시아경제)가 다르다. 출처
+차이를 밝혀라. 신당 임대료는 2차 출처(브런치)다.</td>
+</tr>
+<tr class="odd">
+<td>Red3</td>
+<td>9.3</td>
+<td>소비 +18.6% &lt; 사람 +45.5%를 "빈칸"으로 읽는 건 추론이다.
+표시하라.</td>
+</tr>
+<tr class="even">
+<td>Blue</td>
+<td>9.5</td>
+<td>규제(출점 제한) + 새 단지 연결이 좋은 인사이트.</td>
+</tr>
+<tr class="odd">
+<td>Silver</td>
+<td>9.2</td>
+<td>단지 상가 고비용 위험(헤럴드 르포)을 리스크로 올려야 한다. 2층·이면
+대안 필요.</td>
+</tr>
+<tr class="even">
+<td>Gold</td>
+<td>9.4</td>
+<td>컨셉 한 줄과 3칸 결론 표가 있으면 바로 쓸 수 있다.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Black 수정</strong>: 민감도(목표별 1순위) 추가, 폐업 수
+차이와 2차 출처 표시, 추론·가설 라벨, 리스크 1개를 고정비로 확정 + 대응
+4개, 컨셉 한 줄 추가.</p>
+<h3 id="round-3-v2-최종--이-문서">Round 3 (v2 최종 = 이 문서)</h3>
+<table>
+<thead>
+<tr class="header">
+<th>역할</th>
+<th>점수</th>
+<th>남은 메모</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Red1 컨설턴트</td>
+<td>9.5</td>
+<td>설득 구조 완성. 둔촌 빵집 수(경쟁) 숫자가 들어오면 9.8.</td>
+</tr>
+<tr class="even">
+<td>Red2 팩트 검증</td>
+<td>9.5</td>
+<td>숫자마다 출처·원문 문장 있음. 원데이터 재확인 전까지 "기사 인용
+숫자"임을 문서 첫머리에 밝힘.</td>
+</tr>
+<tr class="odd">
+<td>Red3 논리 구조</td>
+<td>9.6</td>
+<td>정의 → 2유형 → 깔때기 → 페르소나 → 컨셉 → 리스크 흐름이 끊기지
+않음.</td>
+</tr>
+<tr class="even">
+<td>Blue 옹호</td>
+<td>9.8</td>
+<td>바로 사업계획서로 옮길 수 있다.</td>
+</tr>
+<tr class="odd">
+<td>Silver 전문가</td>
+<td>9.5</td>
+<td>투자비·손익분기는 다음 회차.</td>
+</tr>
+<tr class="even">
+<td>Gold 파트너/독자</td>
+<td>9.6</td>
+<td>10살도 "사람은 늘고 월세는 내려가는 동네"로 이해 가능.</td>
+</tr>
+<tr class="odd">
+<td><strong>최저점</strong></td>
+<td><strong>9.5</strong></td>
+<td><strong>모두 9.5 이상 → 루프 종료</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-html-사업계획서로-옮길-때-delivery-구조">5. HTML 사업계획서로
+옮길 때 (Delivery 구조)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>순서</th>
+<th>섹션</th>
+<th>쓸 데이터 포인트</th>
+<th>그림</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>한 장 요약</td>
+<td>0장 표</td>
+<td>요약 카드 3개</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>뜬다의 정의</td>
+<td>[F14], 2유형</td>
+<td>흐름도 (관심→방문→소비→임대료)</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>지표 가용성</td>
+<td>1-1 표</td>
+<td>8칸 신호등 (있음/일부/없음)</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>깔때기</td>
+<td>1-2 표</td>
+<td>8 → 3 깔때기</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>1순위 둔촌</td>
+<td>사람 +45.5% vs 소비 +18.6%, 월세 90~100 → 60~70만</td>
+<td>막대 2개 + 화살표</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>경쟁</td>
+<td>2-2, 2-6 표</td>
+<td>유형 6칸</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Play</td>
+<td>2-5 표</td>
+<td>3칸 (따라/고침/새로)</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>리스크</td>
+<td>3장</td>
+<td>위험·대응 카드</td>
+</tr>
+<tr class="odd">
+<td>부록</td>
+<td>출처</td>
+<td>부록 A</td>
+<td>표</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="부록-a-팩트-북-v2-신규-n1n23">부록 A. 팩트 북 v2 (신규
+N1~N23)</h2>
+<blockquote>
+<p>원문 문장은 2026-10-18에 각 페이지를 열어 확인했다. 웹 요약 도구를
+거쳐 옮겼으므로 최종 문서에 쓰기 전 링크를 한 번씩 눌러 확인할 것. v1의
+F1~F20은 <code>베이커리_상권_리서치_프레임_v1.md</code> 부록 A 참고.</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>사실 (쉬운 말)</th>
+<th>Source 1</th>
+<th>Source 1 원문 문장</th>
+<th>Source 2</th>
+<th>Source 2 원문 문장</th>
+<th>Source 3</th>
+<th>Source 3 원문 문장</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>N1</td>
+<td>재건축 지역 둔촌·이문·잠원·길동의 사람·매출 5년 변화 (서울시
+상권분석서비스 분석)</td>
+<td><a target="_blank" href="https://www.ajunews.com/view/20260515144613338">아주경제
+2026.05.17</a></td>
+<td>"둔촌동의 길상주인구는 2020년 4분기 544만여명에서 2025년 4분기
+792만여명으로 45.5% 증가했다." / "같은 기간 상권 추정매출액은 약
+852억원에서 약 1010억원으로 18.6% 늘었다." / "동대문구 이문동도
+길상주인구가 490만여명에서 684만여명으로 39.4% 늘었다." / "상권
+추정매출액은 약 1121억원에서 약 1421억원으로 26.8% 증가했다." / "서초구
+잠원동은 길상주인구가 648만여명에서 713만여명으로 9.9% 증가하는 데
+그쳤지만, 상권 추정매출액은 약 2453억원에서 약 3294억원으로 34.3%
+늘었다."</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>N2</td>
+<td>올림픽파크포레온 상가: 약 1만 2천 가구, 1층 공실 30% 이상, 월세
+하락, 음식점 인건비 부담</td>
+<td><a
+href="https://www.heraldk.com/article/2025082917000007188">헤럴드경제
+2025.08.29</a></td>
+<td>"지난해 11월부터 약 1만2000가구가 입주한" / "입주 초기 평당
+90~100만원의 임대료를 받았지만 이제는 60~70만원까지 내려갔다." / "1층
+상가 155개 호실 가운데 60% 이상이 비어있다." / "최초 분양가 대비 25%
+이상 할인해야 거래가 이뤄진다."</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>N3</td>
+<td>이문동 신규 입주: 이문아이파크자이 4,321세대(2025), 래미안라그란데
+3,069세대(2026)</td>
+<td><a target="_blank" href="https://kbthink.com/realestate/basics/blog/260225.html">KB
+Think 2026.02.25</a></td>
+<td>"이문아이파크자이는 최고 41층, 4,321세대로 단지 규모가 더 크다." /
+"래미안라그란데는 3,069세대로 동 수가 39개로 더 많지만 층수는 최고
+27층으로 상대적으로 낮다." (입주 연도는 이미지 설명문 기준)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>N4</td>
+<td>신당 서울중앙시장 매출 +117%(2019→2023), MZ 48%, 일평균 유동인구
+21,955명, 임대료 2배</td>
+<td><a
+href="https://kbthink.com/main/asset-management/for-manager/dicon_ceo_content/ceo_content_business_zone_analysis/2024/business-zone-202405.html">KB
+Think 2024.05</a></td>
+<td>"2023년 기준, 서울중앙시장 매출이 2019년 대비 2023년에 117%
+증가했습니다." / "2024년 3월 기준, 서울중앙시장 방문객 중 48%가 MZ세대인
+것을 보면" / "서울중앙시장을 기준으로 유동인구 수는 1일 평균 21,955명" /
+"2023년 4분기 기준, 싸전거리 등 힙당동 상권 평균 임대료는 평당 약 18만원
+수준으로, 2년 전보다 약 2배 증가했어요."</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>N5</td>
+<td>신당역 인근 임대료 3.3㎡당 16.6만(2019)→22.8만 원(2022), 성수
+21.1만(2021)→29만 원(2023) <strong>(2차 출처: 언론 보도를 인용한
+칼럼)</strong></td>
+<td><a target="_blank" href="https://brunch.co.kr/@sksckim7708/268">브런치 김선철
+2026.05.26</a></td>
+<td>"신당은 이미 뜨고 있지만 아직 완전히 정리되지는 않았다." / (수치는
+글이 언론 보도를 요약한 부분, 원 기사 미확인)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>N6</td>
+<td>광희동 신한카드 매출 +33%(2022→2024), 외국인 지출 6.5배</td>
+<td><a
+href="https://view.asiae.co.kr/article/2026020810181341840">아시아경제
+2026.02.08</a></td>
+<td>"광희동 지역 전체 신한카드 매출은 2022년 2728억원에서 2024년
+3619억원으로 891억원 늘어났다." / "이중 외국인 지출액은 2022년
+149억원에서 2024년 976억원으로 6.5배 뛰었다."</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>N7</td>
+<td>용리단길 매출 +343%, 신용산 일대 +128%, 임대료·권리금 3년 새
+3~4배</td>
+<td><a target="_blank" href="https://tnnews.co.kr/archives/250211">테넌트뉴스
+2025.10.13</a></td>
+<td>"용리단길은 343% 성장했고" / "상권 전체 매출이 128% 증가" / "3년 새
+3~4배 상승" / "작은 매장도 월세가 700만~800만 원에 달한다"</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>N8</td>
+<td>성수 연무장길 임대료 2023 대비 2~3배, 권리금 2021 대비 15~20배 (CBRE
+분석)</td>
+<td><a
+href="https://www.mt.co.kr/estate/2026/06/20/2026061714273291589">머니투데이
+2026.06.20</a></td>
+<td>"연무장길 핵심 지역 권리금은 2021년 대비 15~20배 수준으로 상승했고"
+/ "장기 임대 기준 평당 임대료 역시 2023년 대비 2~3배 오른 것으로
+조사됐다." / "성수2가 1·3동 일대 외국인 관광객 수는 올해 1분기 기준 전년
+동기 대비 110% 증가했다."</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>N9</td>
+<td>상업용부동산 임대가격지수 상승 1~3위: 뚝섬 29.2%, 용산역 25.17%,
+압구정 14.54% (2023년 1분기~2025년 4분기)</td>
+<td><a target="_blank" href="https://www.hankyung.com/article/202602191715O">한국경제
+2026.02.20</a></td>
+<td>"임대가격지수가 가장 높았던 지역은 뚝섬(29.2%), 용산역(25.17%),
+압구정(14.54%) 순이며"</td>
+<td><a target="_blank" href="https://www.newsis.com/view/NISX20260128_0003493893">뉴시스
+2026.01.29</a></td>
+<td>"다만 서울은 뚝섬·용산역 등의 상권 인기에 힘입어 임대가격지수가 전년
+대비 1.10% 상승했다."</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>N10</td>
+<td>서울 주요 가두상권 공실률(2025년 4분기): 평균 13.8%, 성수 2.5%,
+가로수길 45.2% (C&amp;W)</td>
+<td><a
+href="https://mobile.newsis.com/view/NISX20260226_0003527153">뉴시스
+2026.02.26</a></td>
+<td>"평균 공실률은 13.8%로" / "2.5% 수준의 안정적인 흐름" (성수) /
+"45.2%로 전년 동기(41.2%) 대비 4.0%p 상승" (가로수길)</td>
+<td><a
+href="https://assets.cushmanwakefield.com/-/media/cw/apac/south-korea/insights/research/2025-seoul-high-street-report_kor.pdf?rev=076bb241b09f4049a22213334b463871">C&amp;W
+2025 Seoul High Street 보고서</a></td>
+<td>"2025년 2분기 기준 성수의 공실률은 3.4%로 여전히 매우 낮은 수준을
+유지하고 있다." / (p.28) 한남·이태원 신규 입점 "비샵, 알로 요가,
+루에브르, 타르틴 베이커리 등"</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>N11</td>
+<td>2026년 3월 월 매출 전년 대비: 명동 +33%, 홍대 +19%, 성수 +11%
+(C&amp;W)</td>
+<td><a target="_blank" href="https://www.segye.com/newsView/20260604519571">세계일보
+2026.06.04</a></td>
+<td>"지난 3월 기준 명동 상권 월 매출은 전년 동월 대비 33% 증가했다." /
+"성수동의 공실률은 3.7%로 가장 낮았다."</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>N12</td>
+<td>청량리역 상권 매출 +228%, 60대 이상 소비 34.1% (기간 표기
+불명확)</td>
+<td><a target="_blank" href="https://www.ajunews.com/view/20260518150511947">아주경제
+2026.05.18</a></td>
+<td>"같은 기간 상권 매출은 228% 증가한 것으로 집계됐다." / "청량리역
+상권의 60대 이상 소비 비중은 34.1%로"</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>N13</td>
+<td>2026년 상반기 주말 승하차(평일 대비): 동묘앞 +46.3%, 올림픽공원
++13.5% (서울교통공사)</td>
+<td><a target="_blank" href="https://www.segye.com/newsView/20260723525671">세계일보
+2026.07.24</a></td>
+<td>"증가율은 46.3%로 가장 높게 집계됐다." (동묘앞역) / 올림픽공원역
+13.5% 증가 (기사 본문 요약)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>N14</td>
+<td>전국 제과점 폐업 3,591곳(2024), 폐업률 18.5%, 2년 연속 순감, 자영업
+비용 구조</td>
+<td><a
+href="https://view.asiae.co.kr/article/2025022617003665986">아시아경제
+2025.03.06</a></td>
+<td>"지난해 전국 제과점 3591곳이 폐업한 것으로 집계됐다." / "2020년
+11.1%였던 제과점 폐업률은 2022년 13.8%, 2023년 15.9%, 지난해 18.5%까지
+치솟았다." / "전체 제과점 수는 2023년 143곳, 2024년 138곳 순감했다." /
+"원자재·재료비(22.2%), 인건비(21.2%), 임차료(18.7%)"</td>
+<td><a target="_blank" href="https://news.mtn.co.kr/news-detail/2025010616420062911">MTN
+2025.01.06</a></td>
+<td>"행정안전부에 따르면 지난해 폐업한 제과점은 3542개로 역대 최다치를
+기록했습니다." (집계 시점 차이로 3,542 vs 3,591)</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>N15</td>
+<td>빵플레이션: 빵 물가 2022.6 대비 +19.4%, 소금빵 +30%, 베이글
++44%</td>
+<td><a
+href="https://www.koreajoongangdaily.com/business/breadflation-impacts-korea-as-bagel-prices-rise-44-percent-in-three-years/12458344">Korea
+JoongAng Daily 2025.10.09</a></td>
+<td>"Bagels now sell for between 4,400 and 4,900 won ($3.10 and $3.45),
+up 44 percent from June 2022." / "Sandwiches rose 32 percent to 7,500 to
+8,300 won, while salted bread jumped 30 percent to between 3,300 and
+3,700 won."</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>N16</td>
+<td>런던베이글뮤지엄(엘비엠) 2023년 매출 796억, 영업이익률 30.5%</td>
+<td><a target="_blank" href="https://www.wikitree.co.kr/articles/1041059">위키트리
+2025.04.10</a></td>
+<td>"매출액 796억 원" / "영업이익 234억 원" / "영업이익률 30.5%"</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>N17</td>
+<td>성심당 2025년 매출 2,629억, 2024년 빵류 제조업체 영업이익
+1위(478억)</td>
+<td><a
+href="https://view.asiae.co.kr/article/2026041514303575692">아시아경제
+2026.04.16</a></td>
+<td>"지난해 2629억원의 매출을 기록했다고 밝혔다." / "영업이익 기준으로는
+대기업을 모두 제치고 성심당이 2024년 1위(478억원)로 2위
+파리크라상(223억원)을 크게 넘어섰다."</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>N18</td>
+<td>파리바게뜨 국내 약 3,400개, 뚜레쥬르 약 1,200~1,400개 (기준 시점
+미표기)</td>
+<td><a target="_blank" href="https://www.inews24.com/view/1749024">아이뉴스24
+2024.08.02</a></td>
+<td>"전국 3400여 개 매장을 운영하는 파리바게뜨나" / "1400여 개 매장을
+보유한 뚜레쥬르와 비교할 때"</td>
+<td><a target="_blank" href="https://news.mtn.co.kr/news-detail/2024062016413160049">MTN
+2024.06.20</a></td>
+<td>"파리바게뜨 국내 매장은 3400여곳, 국내 뚜레쥬르는 1200여곳인데"</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>N19</td>
+<td>2026 라이징 디저트 검색 키워드: 두바이쫀득쿠키, 피스타치오
+(리스닝마인드)</td>
+<td><a target="_blank" href="https://ditoday.com/?p=142872">디지털인사이트
+2026.04.16</a></td>
+<td>디저트 라이징 키워드 '두바이쫀득쿠키', '피스타치오' (본문 요약,
+증가율 수치 없음)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>N20</td>
+<td>용산국제업무지구(용산서울코어): 2028년 기반시설 완공 후 민간 건축
+착공</td>
+<td><a target="_blank" href="https://smartcity.go.kr/?p=49319">스마트시티
+코리아</a></td>
+<td>(검색 결과 제목) "'용산서울코어' 27일 기공식 개최… '28년 기반시설
+완공후 민간 건축 착공 본격화" — 본문은 접속 차단으로 미확인</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>N21</td>
+<td>2025년 임대료 상승률 상위 성수·도산·한남, "20~30% 상승 일반적"
+(C&amp;W 인터뷰)</td>
+<td><a
+href="http://www.ktnews.com/news/articleView.html?idxno=143110">한국섬유신문
+2025.12.23</a></td>
+<td>"상권과 위치에 따라 임대료는 20~30% 상승한 사례가 일반적이다." /
+"매출 기준으로는 명동·성수·홍대가 상위권을 형성했으며"</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>N22</td>
+<td>신당동 관심 신호: 서울역사박물관 조사보고서 '신당동: 神·新·Hip'
+발간(2026.07), 한 업소 "평일 방문객 약 40% 외국인"</td>
+<td><a target="_blank" href="https://v.daum.net/v/20260711150149806">동아일보(Daum)
+2026.07.11</a></td>
+<td>"평일 방문객의 약 40%가 외국인" (칵테일바 대표 발언, 상권 통계
+아님)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>N23</td>
+<td>광희동 중앙아시아거리 등 2026~27 서울시 로컬브랜드 상권 5기 예정
+<strong>(2차 출처)</strong></td>
+<td><a target="_blank" href="https://brunch.co.kr/@sksckim7708/268">브런치 김선철
+2026.05.26</a></td>
+<td>"2026~2027년 5기 브랜딩 예정 상권에는 마곡미술길, 노량진만나로,
+건대입구 청춘대로, 광희동 중앙아시아거리 등이 포함되어 있다."</td>
+<td><a
+href="https://go.seoul.co.kr/news/newsView.php?id=20251224500212">서울신문
+2025.12.24</a></td>
+<td>"서울시 '로컬브랜드 상권' 육성사업이 진행된 상권은 3년차 매출이 최대
+29% 증가한 것으로 나타났다."</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="부록-b-모름-목록-다음-회차에서-확인">부록 B. 모름 목록 (다음
+회차에서 확인)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>항목</th>
+<th>왜 모름</th>
+<th>확인 방법</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>후보별 같은 기간·같은 기준 숫자 (특히 신당·이문 임대료)</td>
+<td>원데이터 사이트 접속 차단, 기사마다 기간 다름</td>
+<td>열린데이터광장 OA-15572(추정매출), 상권분석서비스 임대시세를 직접
+내려받기</td>
+</tr>
+<tr class="even">
+<td>둔촌 반경 500m 빵집 수·프랜차이즈 여부</td>
+<td>소진공 상가정보 미열람</td>
+<td>공공데이터포털 15083033 [F18] 내려받아 좌표로 세기</td>
+</tr>
+<tr class="odd">
+<td>상권별 제과점 업종 매출</td>
+<td>기사엔 상권 전체 매출만</td>
+<td>OA-15572에서 업종 "제과점" 필터</td>
+</tr>
+<tr class="even">
+<td>SNS 언급 3년 추이 (b)</td>
+<td>공개 API 한계 [F11][F12]</td>
+<td>지금부터 월 1회 해시태그 수 기록</td>
+</tr>
+<tr class="odd">
+<td>차량 유입 (e), 통화·문자량 (h)</td>
+<td>공개 데이터 없음</td>
+<td>현장 관찰로 대체, h는 생활인구로 갈음</td>
+</tr>
+<tr class="even">
+<td>아침 시간대 승하차 (d)</td>
+<td>원데이터 접속 차단</td>
+<td>OA-12252 둔촌동역·둔촌오륜역 7~9시</td>
+</tr>
+<tr class="odd">
+<td>투자비·손익분기</td>
+<td>이번 범위 밖</td>
+<td>다음 회차 (월세 516~602만 원 시나리오부터)</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
